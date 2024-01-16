@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // create_owners_table
-        Schema::create('owners', function (Blueprint $table) {
+        // create_customers_table
+        Schema::create('customers', function (Blueprint $table) {
             $table->id();
             $table->string('email');
             $table->string('name');
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('owners');
+        Schema::dropIfExists('customers');
     }
 };

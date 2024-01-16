@@ -36,8 +36,8 @@ class PatientResource extends Resource
                 Forms\Components\DatePicker::make('date_of_birth')
                     ->required()
                     ->maxDate(now()),
-                Forms\Components\Select::make('owner_id')
-                    ->relationship('owner', 'name')
+                Forms\Components\Select::make('customer_id')
+                    ->relationship('customer', 'name')
                     ->searchable()
                     ->preload()
                     ->createOptionForm([
@@ -66,7 +66,7 @@ class PatientResource extends Resource
                 Tables\Columns\TextColumn::make('name')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('type'),
                 Tables\Columns\TextColumn::make('date_of_birth')->sortable(),
-                Tables\Columns\TextColumn::make('owner.name')->searchable(),
+                Tables\Columns\TextColumn::make('customer.name')->searchable(),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('type')
