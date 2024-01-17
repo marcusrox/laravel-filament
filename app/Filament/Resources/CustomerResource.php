@@ -23,18 +23,24 @@ class CustomerResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('email')
-                    ->label('Email address')
-                    ->email()
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('phone')
-                    ->label('Phone number')
-                    ->tel()
-                    ->required(),
+                Forms\Components\Section::make('Informações do Cliente')
+                ->description('Dados cadastrais dos clientes qe compram na nossa empresa')
+                ->collapsible()
+                ->icon('heroicon-m-shopping-bag')
+                ->schema([
+                    Forms\Components\TextInput::make('name')
+                        ->required()
+                        ->maxLength(255),
+                    Forms\Components\TextInput::make('email')
+                        ->label('Email address')
+                        ->email()
+                        ->required()
+                        ->maxLength(255),
+                    Forms\Components\TextInput::make('phone')
+                        ->label('Phone number')
+                        ->tel()
+                        ->required(),
+                    ])
             ]);
     }
 
@@ -55,6 +61,7 @@ class CustomerResource extends Resource
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+                    
                 ]),
             ]);
     }
