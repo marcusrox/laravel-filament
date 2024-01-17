@@ -7,11 +7,13 @@ use App\Filament\Resources\UserResource\RelationManagers;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class UserResource extends Resource
@@ -37,7 +39,9 @@ class UserResource extends Resource
                 Forms\Components\TextInput::make('password')
                     ->password()
                     ->revealable()
-                    ->autocomplete(false),
+                    ->autocomplete(false)
+                    ->required(fn (string $context): bool => $context === 'create') // Só vai exisgir preenchimento se for na criação
+                    ->dehydrated(fn ($state) => filled($state)), // Na edição, se campo não fornenecido, não vai alterar pra vazio
             // Forms\Components\Toggle::make('active')
             //     ->label('Ativo?')
             //     ->inline()
@@ -73,7 +77,17 @@ class UserResource extends Resource
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
-                    Tables\Actions\BulkAction::make('desativar')->icon('heroicon-m-arrow-small-down'),
+                    Tables\Actions\BulkAction::make('Desativar')
+                        //->icon('heroicon-o-ban')
+                        ->icon('heroicon-m-arrow-small-down')
+                        ->requiresConfirmation()
+                        ->action(fn(Collection $users) => $users->each->update(['active' => false]))
+                        ->after(fn() => Notification::make()
+                            ->title('Desativação em lote concluída')
+                            ->success()
+                            ->send()
+                        )
+                        
                 ]),
             ]);
     }
