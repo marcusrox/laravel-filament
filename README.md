@@ -18,3 +18,4 @@ $ php artisan key:generate
 $ php artisan make:filament-resource Customer --generate
 $ php artisan make:model Permission
 $ php artisan make:filament-resource Permission --generate --simple
+$ php artisan make:observer UserObserver --model=User
