@@ -26,11 +26,20 @@ class ManageUsers extends ManageRecords
                 ->modifyQueryUsing(fn (Builder $query) => $query->where('active', false)),
         ];
     }
-
+    // protected function mutateFormDataBeforeCreate(array $data): array
+    // {
+    //     dd($data);
+    //     return $data;
+    // }
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            Actions\CreateAction::make()
+                ->mutateFormDataUsing(function (array $data): array {
+                    //$data['user_id'] = auth()->id();
+                    //dd($data);
+                    return $data;
+                })
         ];
     }
 }
