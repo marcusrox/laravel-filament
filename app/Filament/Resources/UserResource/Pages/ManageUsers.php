@@ -5,6 +5,7 @@ namespace App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource;
 use App\Models\User;
 use Filament\Actions;
+use Filament\Notifications\Notification;
 use Filament\Resources\Pages\ManageRecords;
 
 use Filament\Resources\Components\Tab;
@@ -40,6 +41,10 @@ class ManageUsers extends ManageRecords
                     //dd($data);
                     return $data;
                 })
+                ->after(
+                    fn () => Notification::make()->title('Novo usuário cadastrado no sistema')->sendToDatabase(\auth()->user())
+                )
+
         ];
     }
 }
