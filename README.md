@@ -13,3 +13,8 @@ $ php artisan migrate
 $ php artisan make:filament-user
 $ cp .env.example .env
 $ php artisan key:generate
+
+## Comandos úteis para o desenvolvimento
+$ php artisan make:filament-resource Customer --generate
+$ php artisan make:model Permission
+$ php artisan make:filament-resource Permission --generate --simple

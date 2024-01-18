@@ -16,11 +16,12 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
+
 class UserResource extends Resource
 {
     protected static ?string $model = User::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-users';
 
     public static function form(Form $form): Form
     {
@@ -65,7 +66,12 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('email')->searchable()->sortable(),
                 //Tables\Columns\IconColumn::make('active')->boolean(),
                 Tables\Columns\ToggleColumn::make('active')->label('Active')->sortable(),
-            ])
+                Tables\Columns\TextColumn::make('created_at')
+                    ->dateTime('d/m/Y H:i:s')
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+
+                ])
             ->filters([
                 //Tables\Filters\Filter::make('active')->default(true),
 
@@ -73,6 +79,7 @@ class UserResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
+    
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -91,6 +98,7 @@ class UserResource extends Resource
                 ]),
             ]);
     }
+
 
     public static function getPages(): array
     {
