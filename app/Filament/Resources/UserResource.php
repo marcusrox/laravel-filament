@@ -52,7 +52,12 @@ class UserResource extends Resource
                     ->boolean()
                     ->default(true)
                     ->inline()
-                    ->inlineLabel(false)
+                    ->inlineLabel(false),
+                Forms\Components\Select::make('roles')
+                    ->relationship('roles', 'name')
+                    ->multiple()
+                    ->preload()
+                
             ]);
     }
 
