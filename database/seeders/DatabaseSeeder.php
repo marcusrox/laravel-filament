@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'marcus@idevs.com.br',
             'password' => Hash::make('12345678'),
             'active' => true,
-            'avatar' => 'https://i.pravatar.cc/300?img=' . fake()->numberBetween(1, 70),
+            'avatar_url' => 'https://i.pravatar.cc/300?img=' . fake()->numberBetween(1, 70),
         ]);
 
         \App\Models\User::factory()->create([
@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'suporte@idevs.com.br',
             'password' => Hash::make('12345678'),
             'active' => true,
-            'avatar' => 'https://i.pravatar.cc/300?img=' . fake()->numberBetween(1, 70),
+            'avatar_url' => 'https://i.pravatar.cc/300?img=' . fake()->numberBetween(1, 70),
         ]);
 
         \App\Models\User::factory(10)->create();

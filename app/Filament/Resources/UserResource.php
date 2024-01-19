@@ -65,7 +65,7 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\ImageColumn::make('avatar')->label('Foto')->circular(),
+                Tables\Columns\ImageColumn::make('avatar_url')->label('Foto')->circular(),
                 Tables\Columns\TextColumn::make('id')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('name')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('email')->searchable()->sortable(),
