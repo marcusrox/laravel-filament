@@ -13,11 +13,12 @@ class CreateCustomer extends CreateRecord
 
     protected function getCreatedNotification(): ?Notification
     {
-        return 
+
+        return
             Notification::make()
             ->success()
             ->title('Novo cliente')
-            ->body('O novo cliente foi cadastrado com sucesso!')
+            ->body('O novo cliente foi cadastrao com sucesso!')
             ->sendToDatabase(\auth()->user());
     }
 }

@@ -4,6 +4,7 @@ namespace App\Filament\Resources\UserResource\Pages;
 
 use App\Filament\Resources\UserResource;
 use App\Models\User;
+use Carbon\Carbon;
 use Filament\Actions;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\ManageRecords;
@@ -37,6 +38,7 @@ class ManageUsers extends ManageRecords
         return [
             Actions\CreateAction::make()
                 ->mutateFormDataUsing(function (array $data): array {
+                    $data['email_verified_at'] = Carbon::now();
                     //$data['user_id'] = auth()->id();
                     //dd($data);
                     return $data;

@@ -15,9 +15,9 @@ class UserObserver
         Notification::make()
             ->title('Bem vindo ao sistema')
             ->body('Você pode alterar seus dados cadastrais na página do Perfil!')
-            ->sendToDatabase(\auth()->user());
+            ->sendToDatabase($user);
     }
-    
+
 
     /**
      * Handle the User "updated" event.
