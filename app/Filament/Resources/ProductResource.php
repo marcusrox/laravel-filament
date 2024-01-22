@@ -4,9 +4,11 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\ProductResource\Pages;
 use App\Filament\Resources\ProductResource\RelationManagers;
+use App\Filament\Resources\ProductResource\RelationManagers\CategoriesRelationManager;
 use App\Models\Product;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -47,9 +49,13 @@ class ProductResource extends Resource
                 Forms\Components\TextInput::make('slug')
                     ->required()
                     ->maxLength(255),
+                // Forms\Components\Select::make('categories')
+                //     ->multiple()
+                //     ->preload()
+                //     ->relationship('categories', 'name'),
                 Forms\Components\FileUpload::make('photo')
                     ->image() // faz validação se upload é imagem
-                    ->directory('products'), // Directory dentro de pubic
+                    ->directory('products'), // Directory dentro de public
             ]);
     }
 
@@ -94,7 +100,7 @@ class ProductResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            CategoriesRelationManager::class
         ];
     }
 
