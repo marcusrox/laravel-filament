@@ -29,7 +29,9 @@ class ProductResource extends Resource
                     ->afterStateUpdated(function($state, $set) {
                         $set('slug', Str::slug($state));
                     })
+                    ->live(onBlur: true)
                     ->required()
+                    ->autocomplete(false)
                     ->maxLength(255),
                 Forms\Components\TextInput::make('description')
                     ->maxLength(255),

@@ -43,21 +43,23 @@ class UserResource extends Resource
                     ->autocomplete(false)
                     ->required(fn (string $context): bool => $context === 'create') // Só vai exisgir preenchimento se for na criação
                     ->dehydrated(fn ($state) => filled($state)), // Na edição, se campo não fornenecido, não vai alterar pra vazio
-            // Forms\Components\Toggle::make('active')
-            //     ->label('Ativo?')
-            //     ->inline()
-            //     ->inlineLabel(false)
-            //     ->default(true),
+                // Forms\Components\Toggle::make('active')
+                //     ->label('Ativo?')
+                //     ->inline()
+                //     ->inlineLabel(false)
+                //     ->default(true),
                 Forms\Components\Radio::make('active')
                     ->boolean()
                     ->default(true)
                     ->inline()
                     ->inlineLabel(false),
+                Forms\Components\TextInput::make('avatar_url')
+                    ->label('Avatar'),
                 Forms\Components\Select::make('roles')
                     ->relationship('roles', 'name')
                     ->multiple()
                     ->preload()
-                
+
             ]);
     }
 
@@ -76,7 +78,7 @@ class UserResource extends Resource
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
 
-                ])
+            ])
             ->filters([
                 //Tables\Filters\Filter::make('active')->default(true),
 
@@ -84,7 +86,7 @@ class UserResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
-    
+
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -93,13 +95,14 @@ class UserResource extends Resource
                         //->icon('heroicon-o-ban')
                         ->icon('heroicon-m-arrow-small-down')
                         ->requiresConfirmation()
-                        ->action(fn(Collection $users) => $users->each->update(['active' => false]))
-                        ->after(fn() => Notification::make()
-                            ->title('Desativação em lote concluída')
-                            ->success()
-                            ->send()
+                        ->action(fn (Collection $users) => $users->each->update(['active' => false]))
+                        ->after(
+                            fn () => Notification::make()
+                                ->title('Desativação em lote concluída')
+                                ->success()
+                                ->send()
                         )
-                        
+
                 ]),
             ]);
     }
@@ -111,4 +114,10 @@ class UserResource extends Resource
             'index' => Pages\ManageUsers::route('/'),
         ];
     }
+
+    // public static function canCreate(): bool
+    // {
+    //     return true;
+    // } 
+
 }
