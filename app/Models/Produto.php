@@ -7,17 +7,17 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Product extends Model
+class Produto extends Model
 {
     use HasFactory;
 
     protected $casts = [
-        'price' => MoneyCast::class,
+        'preco' => MoneyCast::class,
     ];
- 
-    public function categories(): BelongsToMany
+
+    public function categorias(): BelongsToMany
     {
-        return $this->belongsToMany(Category::class);
+        return $this->belongsToMany(Categoria::class);
     }
 
 }

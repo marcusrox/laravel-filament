@@ -2,24 +2,18 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\ProductResource\Pages;
-use App\Filament\Resources\ProductResource\RelationManagers;
-use App\Filament\Resources\ProductResource\RelationManagers\CategoriesRelationManager;
-use App\Models\Product;
+use App\Filament\Resources\ProdutoResource\Pages;
+use App\Models\Produto;
 use Filament\Forms;
-use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Str;
 
-class ProductResource extends Resource
+class ProdutoResource extends Resource
 {
-    protected static ?string $model = Product::class;
+    protected static ?string $model = Produto::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
     protected static ?string $navigationLabel = 'Produtos';
@@ -29,40 +23,40 @@ class ProductResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
+                Forms\Components\TextInput::make('nome')
                     ->reactive() // <<---- IMPORTANTE
-                    ->afterStateUpdated(function($state, $set) {
+                    ->afterStateUpdated(function ($state, $set) {
                         $set('slug', Str::slug($state));
                     })
                     ->live(onBlur: true)
                     ->required()
                     ->autocomplete(false)
                     ->maxLength(255),
-                Forms\Components\TextInput::make('description')
+                Forms\Components\TextInput::make('descricao')
                     ->maxLength(255),
-                Forms\Components\TextInput::make('price')
+                Forms\Components\TextInput::make('preco')
                     ->required()
                     ->numeric()
                     ->prefix('R$')
                     ->maxValue(42949672.95),
-                Forms\Components\TextInput::make('quantity')
+                Forms\Components\TextInput::make('qtd_estoque')
                     ->required()
                     ->numeric(),
 
-            // Forms\Components\Select::make('categories')
-            //     ->multiple()
-            //     ->preload()
-            //     ->relationship('categories', 'name'),
+                // Forms\Components\Select::make('categories')
+                //     ->multiple()
+                //     ->preload()
+                //     ->relationship('categories', 'name'),
 
-                Forms\Components\Select::make('categories')
-                    ->relationship('categories', 'name')
+                Forms\Components\Select::make('categorias')
+                    ->relationship('categorias', 'nome')
                     ->multiple()
                     ->searchable()
                     ->preload()
                     ->createOptionForm([
-                        Forms\Components\TextInput::make('name')
-                        ->required()
-                        ->maxLength(255),
+                        Forms\Components\TextInput::make('nome')
+                            ->required()
+                            ->maxLength(255),
                     ])
                     ->required(),
 
@@ -70,10 +64,9 @@ class ProductResource extends Resource
                     ->required()
                     ->maxLength(255),
 
-                Forms\Components\FileUpload::make('photo')
+                Forms\Components\FileUpload::make('foto')
                     ->image() // faz validação se upload é imagem
-                    ->directory('products'), // Directory dentro de public
-
+                    ->directory('produtos'), // Directory dentro de public
 
             ]);
     }
@@ -82,15 +75,15 @@ class ProductResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\ImageColumn::make('photo'),
+                Tables\Columns\ImageColumn::make('foto'),
                 Tables\Columns\TextColumn::make('id')->sortable(),
-                Tables\Columns\TextColumn::make('name')
+                Tables\Columns\TextColumn::make('nome')
                     ->sortable()
                     ->searchable(),
-                Tables\Columns\TextColumn::make('price')
+                Tables\Columns\TextColumn::make('preco')
                     ->money('BRL')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('quantity')
+                Tables\Columns\TextColumn::make('qtd_estoque')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
@@ -126,9 +119,9 @@ class ProductResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListProducts::route('/'),
-            'create' => Pages\CreateProduct::route('/create'),
-            'edit' => Pages\EditProduct::route('/{record}/edit'),
+            'index' => Pages\ListProdutos::route('/'),
+            'create' => Pages\CreateProduto::route('/create'),
+            'edit' => Pages\EditProduto::route('/{record}/edit'),
         ];
     }
 }

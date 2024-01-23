@@ -14,6 +14,7 @@ $ php artisan make:filament-user
 $ cp .env.example .env
 $ php artisan key:generate
 $ php artisan storage:link
+$ php artisan db:wipe
 
 ## Comandos úteis para o desenvolvimento
 $ php artisan make:filament-resource Customer --generate

@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
  */
-class ProductFactory extends Factory
+class ProdutoFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -19,10 +19,10 @@ class ProductFactory extends Factory
     {
         $name = fake()->words(asText: true);
         return [
-            'name' => $name,
-            'description' => fake()->sentence(),
-            'price' => rand(10, 1000),
-            'quantity' => rand(0, 100),
+            'nome' => $name,
+            'descricao' => fake()->sentence(),
+            'preco' => rand(10, 1000),
+            'qtd_estoque' => rand(0, 100),
             'slug' => Str::slug($name),
         ];
     }

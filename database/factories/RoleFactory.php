@@ -5,7 +5,7 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Category>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\>
  */
 class RoleFactory extends Factory
 {
@@ -18,7 +18,7 @@ class RoleFactory extends Factory
     {
         return [
             'name' => fake()->name(),
-            'guard_name' => 'web'
+            'guard_name' => 'web',
         ];
     }
 }

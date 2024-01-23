@@ -16,15 +16,15 @@ class DatabaseSeeder extends Seeder
 
         $admin = \App\Models\Role::factory()->create([
             'name' => 'Admin',
-            'guard_name' => 'web'
+            'guard_name' => 'web',
         ]);
         $financeiro = \App\Models\Role::factory()->create([
             'name' => 'Financeiro',
-            'guard_name' => 'web'
+            'guard_name' => 'web',
         ]);
         $representante = \App\Models\Role::factory()->create([
             'name' => 'Representante',
-            'guard_name' => 'web'
+            'guard_name' => 'web',
         ]);
 
         $u_admin = \App\Models\User::factory()->create([
@@ -57,7 +57,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\User::factory(10)->create();
         \App\Models\Customer::factory(10)->create();
         \App\Models\Patient::factory(20)->create();
-        \App\Models\Product::factory(20)->create();
+        \App\Models\Produto::factory(20)->create();
 
     }
 }
