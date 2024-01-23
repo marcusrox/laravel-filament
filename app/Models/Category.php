@@ -17,18 +17,18 @@ class Category extends Model
     }
 
 
-    // public static function boot()
-    // {
-    //     parent::boot();
-    //     self::created(function ($model) {
-    //         $this->attributes['slug'] = Str::slug($this->name);
-    //     });
-    //     self::updated(function ($model) {
-    //         $this->attributes['slug'] = Str::slug($this->name);
-    //     });
-    //     self::deleted(function ($model) {
+    public static function boot()
+    {
+        parent::boot();
+        self::creating(function ($model) {
+            $model->slug = Str::slug($model->name);
+        });
+        self::updating(function ($model) {
+            $model->slug = Str::slug($model->name);
+        });
+        self::deleting(function ($model) {
             
-    //     });
-    // }
+        });
+    }
 
 }

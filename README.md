@@ -23,5 +23,3 @@ $ php artisan make:observer UserObserver --model=User
 $ php artisan make:model Category -mfs // Criar model com migration, factory e seeder
 $ php artisan make:filament-relation-manager ProductResource categories name
 
-
-

@@ -18,6 +18,12 @@ class PatientResource extends Resource
     protected static ?string $model = Patient::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-heart';
+    protected static ?string $navigationLabel = 'Pacientes';
+
+    protected static ?string $navigationGroup = "Cadastros";
+    //protected static ?string $navigationParentItem = 'Produtos';
+
+    //protected static bool $shouldRegisterNavigation = false;
 
     public static function form(Form $form): Form
     {

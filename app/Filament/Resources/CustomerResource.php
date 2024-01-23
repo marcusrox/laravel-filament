@@ -3,44 +3,43 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\CustomerResource\Pages;
-use App\Filament\Resources\CustomerResource\RelationManagers;
 use App\Models\Customer;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class CustomerResource extends Resource
 {
-    protected static ?string $model = Customer::class;
 
+    protected static ?string $model = Customer::class;
     protected static ?string $navigationIcon = 'heroicon-o-user-circle';
+    protected static ?string $navigationLabel = 'Clientes';
+    protected static ?string $navigationGroup = "Cadastros";
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\Section::make('Informações do Cliente')
-                ->description('Dados cadastrais dos clientes qe compram na nossa empresa')
-                ->collapsible()
-                ->icon('heroicon-m-shopping-bag')
-                ->schema([
-                    Forms\Components\TextInput::make('name')
-                        ->required()
-                        ->maxLength(255),
-                    Forms\Components\TextInput::make('email')
-                        ->label('Email address')
-                        ->email()
-                        ->required()
-                        ->maxLength(255),
-                    Forms\Components\TextInput::make('phone')
-                        ->label('Phone number')
-                        ->tel()
-                        ->required(),
-                    ])
+                    ->description('Dados cadastrais dos clientes qe compram na nossa empresa')
+                    ->collapsible()
+                    ->icon('heroicon-m-shopping-bag')
+                    ->schema([
+                        Forms\Components\TextInput::make('name')
+                            ->required()
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('email')
+                            ->label('Email address')
+                            ->email()
+                            ->required()
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('phone')
+                            ->label('Phone number')
+                            ->tel()
+                            ->required(),
+                    ]),
             ]);
     }
 
@@ -65,7 +64,7 @@ class CustomerResource extends Resource
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
-                    
+
                 ]),
             ]);
     }
@@ -73,7 +72,7 @@ class CustomerResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+//
         ];
     }
 

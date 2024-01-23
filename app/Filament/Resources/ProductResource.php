@@ -22,6 +22,8 @@ class ProductResource extends Resource
     protected static ?string $model = Product::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationLabel = 'Produtos';
+    protected static ?string $navigationGroup = "Cadastros";
 
     public static function form(Form $form): Form
     {
@@ -46,16 +48,33 @@ class ProductResource extends Resource
                 Forms\Components\TextInput::make('quantity')
                     ->required()
                     ->numeric(),
+
+            // Forms\Components\Select::make('categories')
+            //     ->multiple()
+            //     ->preload()
+            //     ->relationship('categories', 'name'),
+
+                Forms\Components\Select::make('categories')
+                    ->relationship('categories', 'name')
+                    ->multiple()
+                    ->searchable()
+                    ->preload()
+                    ->createOptionForm([
+                        Forms\Components\TextInput::make('name')
+                        ->required()
+                        ->maxLength(255),
+                    ])
+                    ->required(),
+
                 Forms\Components\TextInput::make('slug')
                     ->required()
                     ->maxLength(255),
-                // Forms\Components\Select::make('categories')
-                //     ->multiple()
-                //     ->preload()
-                //     ->relationship('categories', 'name'),
+
                 Forms\Components\FileUpload::make('photo')
                     ->image() // faz validação se upload é imagem
                     ->directory('products'), // Directory dentro de public
+
+
             ]);
     }
 
@@ -100,7 +119,7 @@ class ProductResource extends Resource
     public static function getRelations(): array
     {
         return [
-            CategoriesRelationManager::class
+            //CategoriesRelationManager::class
         ];
     }
 
