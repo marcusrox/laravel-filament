@@ -42,21 +42,21 @@ class PatientResource extends Resource
                 Forms\Components\DatePicker::make('date_of_birth')
                     ->required()
                     ->maxDate(now()),
-                Forms\Components\Select::make('customer_id')
-                    ->relationship('customer', 'name')
+                Forms\Components\Select::make('cliente_id')
+                    ->relationship('cliente', 'nome')
                     ->searchable()
                     ->preload()
                     ->createOptionForm([
-                        Forms\Components\TextInput::make('name')
+                        Forms\Components\TextInput::make('nome')
                             ->required()
                             ->maxLength(255),
                         Forms\Components\TextInput::make('email')
-                            ->label('Email address')
+                            ->label('Email')
                             ->email()
                             ->required()
                             ->maxLength(255),
-                        Forms\Components\TextInput::make('phone')
-                            ->label('Phone number')
+                        Forms\Components\TextInput::make('telefone')
+                            ->label('Telefone')
                             ->tel()
                             ->required(),
                     ])

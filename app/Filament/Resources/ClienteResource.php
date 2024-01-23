@@ -2,18 +2,18 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\CustomerResource\Pages;
-use App\Models\Customer;
+use App\Filament\Resources\ClienteResource\Pages;
+use App\Models\Cliente;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 
-class CustomerResource extends Resource
+class ClienteResource extends Resource
 {
 
-    protected static ?string $model = Customer::class;
+    protected static ?string $model = Cliente::class;
     protected static ?string $navigationIcon = 'heroicon-o-user-circle';
     protected static ?string $navigationLabel = 'Clientes';
     protected static ?string $navigationGroup = "Cadastros";
@@ -27,16 +27,16 @@ class CustomerResource extends Resource
                     ->collapsible()
                     ->icon('heroicon-m-shopping-bag')
                     ->schema([
-                        Forms\Components\TextInput::make('name')
+                        Forms\Components\TextInput::make('nome')
                             ->required()
                             ->maxLength(255),
                         Forms\Components\TextInput::make('email')
-                            ->label('Email address')
+                            ->label('E-mail')
                             ->email()
                             ->required()
                             ->maxLength(255),
-                        Forms\Components\TextInput::make('phone')
-                            ->label('Phone number')
+                        Forms\Components\TextInput::make('telefone')
+                            ->label('Telefone')
                             ->tel()
                             ->required(),
                     ]),
@@ -48,8 +48,8 @@ class CustomerResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('id')->searchable()->sortable(),
-                Tables\Columns\TextColumn::make('name')->searchable()->sortable(),
-                Tables\Columns\TextColumn::make('phone')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('nome')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('telefone')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime('d/m/Y H:i:s')
                     ->sortable()
@@ -79,9 +79,9 @@ class CustomerResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListCustomers::route('/'),
-            'create' => Pages\CreateCustomer::route('/create'),
-            'edit' => Pages\EditCustomer::route('/{record}/edit'),
+            'index' => Pages\ListClientes::route('/'),
+            'create' => Pages\CreateCliente::route('/create'),
+            'edit' => Pages\EditCliente::route('/{record}/edit'),
         ];
     }
 }

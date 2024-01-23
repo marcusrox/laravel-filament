@@ -22,7 +22,7 @@ class PatientFactory extends Factory
             'name' => fake()->name(),
             'date_of_birth' => fake()->date(),
             'type' => 'dog',
-            'customer_id' => rand(1, 10)
+            'cliente_id' => rand(1, 10)
         ];
     }
 }

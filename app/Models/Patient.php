@@ -10,9 +10,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Patient extends Model
 {
     use HasFactory;
-    public function customer(): BelongsTo
+    public function cliente(): BelongsTo
     {
-        return $this->belongsTo(Customer::class);
+        return $this->belongsTo(Cliente::class);
     }
 
     public function treatments(): HasMany
