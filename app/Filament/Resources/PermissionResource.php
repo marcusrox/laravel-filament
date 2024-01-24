@@ -3,15 +3,12 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\PermissionResource\Pages;
-use App\Filament\Resources\PermissionResource\RelationManagers;
 use App\Models\Permission;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class PermissionResource extends Resource
 {
@@ -28,7 +25,10 @@ class PermissionResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
-
+                Forms\Components\Select::make('roles')
+                    ->relationship('roles', 'name')
+                    ->multiple()
+                    ->preload(),
             ]);
     }
 
@@ -38,7 +38,7 @@ class PermissionResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
-
+                Tables\Columns\TextColumn::make('roles.name'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime('d/m/Y H:i:s')
                     ->sortable()
