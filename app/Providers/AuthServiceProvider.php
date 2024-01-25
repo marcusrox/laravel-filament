@@ -24,8 +24,8 @@ class AuthServiceProvider extends ServiceProvider
     {
         // Bypassar autenticação em DEV
         if (config('app.env') === 'local') {
-            $user = \App\Models\User::find(1);
-            Auth::login($user);
+            //$user = \App\Models\User::find(1);
+            //Auth::login($user);
         }
 
     }

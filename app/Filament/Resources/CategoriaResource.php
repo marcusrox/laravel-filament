@@ -17,7 +17,7 @@ class CategoriaResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
     protected static ?string $navigationLabel = 'Categorias';
     protected static ?string $navigationGroup = "Cadastros";
-//protected static ?string $navigationParentItem = 'Produtos';
+    protected static ?string $navigationParentItem = 'Produtos';
 
     public static function form(Form $form): Form
     {
