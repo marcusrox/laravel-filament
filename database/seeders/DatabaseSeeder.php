@@ -69,6 +69,8 @@ class DatabaseSeeder extends Seeder
         \App\Models\Produto::factory(20)->create();
 
         $this->call([
-            PermissionSeeder::class]);
+            PermissionSeeder::class,
+            CategoriaSeeder::class,
+        ]);
     }
 }

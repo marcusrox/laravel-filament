@@ -23,13 +23,27 @@ class ClienteResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Section::make('Informações do Cliente')
-                    ->description('Dados cadastrais dos clientes qe compram na nossa empresa')
+                    ->description('Dados cadastrais do cliente')
                     ->collapsible()
                     ->icon('heroicon-m-shopping-bag')
                     ->schema([
                         Forms\Components\TextInput::make('nome')
                             ->required()
                             ->maxLength(255),
+                        Forms\Components\TextInput::make('razao_social')
+                            ->required()
+                            ->maxLength(255),
+                        Forms\Components\Select::make('tipo_pessoa')
+                            ->options([
+                                'J' => 'Jurídica',
+                                'F' => 'Física',
+                            ]),
+                        Forms\Components\TextInput::make('cpf_cnpj')
+                            ->required()
+                            ->maxLength(20),
+                        Forms\Components\TextInput::make('inscricao_estadual')
+                            ->required()
+                            ->maxLength(20),
                         Forms\Components\TextInput::make('email')
                             ->label('E-mail')
                             ->email()
@@ -40,6 +54,7 @@ class ClienteResource extends Resource
                             ->tel()
                             ->required(),
                     ]),
+
             ]);
     }
 
