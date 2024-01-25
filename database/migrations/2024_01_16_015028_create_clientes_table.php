@@ -25,10 +25,11 @@ return new class extends Migration
             $table->string('end_bairro')->nullable();
             $table->string('end_cep')->nullable();
             $table->string('end_uf')->nullable();
-            $table->foreignId('end_cidade_id')->constrained('cidades')->cascadeOnDelete()->nullable();
+            $table->foreignId('end_cidade_id')->nullable()->constrained('cidades')->cascadeOnDelete();
 
             $table->string('telefone')->nullable();
             $table->string('celular')->nullable();
+            $table->string('email');
 
             $table->string('end_cob_endereco')->nullable();
             $table->string('end_cob_numero')->nullable();
@@ -36,22 +37,16 @@ return new class extends Migration
             $table->string('end_cob_bairro')->nullable();
             $table->string('end_cob_cep')->nullable();
             $table->string('end_cob_uf')->nullable();
-            $table->foreignId('end_cob_cidade_id')->constrained('cidades')->cascadeOnDelete()->nullable();
+            $table->foreignId('end_cob_cidade_id')->nullable()->constrained('cidades')->cascadeOnDelete();
 
             $table->string('nome_contato_cobranca')->nullable();
-            $table->string('email_cobranca')->nullable();
             $table->string('telefone_cobranca')->nullable();
             $table->string('celular_cobranca')->nullable();
+            $table->string('email_cobranca')->nullable();
 
             $table->boolean('bloqueado')->default(0);
             $table->string('motivo_bloqueio')->nullable();
             $table->unsignedInteger('vl_limite_credito')->nullable();
-
-            $table->string('email');
-            $table->string('telefone');
-            $table->string('celular');
-
-
 
             $table->timestamps();
         });
