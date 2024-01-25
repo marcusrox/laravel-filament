@@ -43,7 +43,7 @@ class DatabaseSeeder extends Seeder
             'active' => true,
             'avatar_url' => 'https://i.pravatar.cc/300?img=' . fake()->numberBetween(1, 70),
         ]);
-        $u_marcus->roles()->attach($admin);        
+        $u_marcus->roles()->attach($admin);
 
         $u_financeiro = \App\Models\User::factory()->create([
             'name' => 'Financeiro iDev',
@@ -68,5 +68,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\Patient::factory(20)->create();
         \App\Models\Produto::factory(20)->create();
 
+        $this->call([
+            PermissionSeeder::class]);
     }
 }
