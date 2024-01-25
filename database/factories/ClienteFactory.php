@@ -20,8 +20,13 @@ class ClienteFactory extends Factory
     {
         return [
             'nome' => fake()->name(),
+            'razao_social' => fake()->name(),
+            'tipo_pessoa' => fake()->randomElement(['F', 'J']),
+            'cpf_cnpj' => fake()->unique()->numberBetween('11111111111', '21111111111'),
+
             'email' => fake()->unique()->safeEmail(),
             'telefone' => fake()->phoneNumber(),
+
         ];
     }
 
