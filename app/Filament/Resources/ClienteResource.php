@@ -23,6 +23,7 @@ class ClienteResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Section::make('Informações do Cliente')
+                    ->columns(2)
                     ->description('Dados cadastrais do cliente')
                     ->collapsible()
                     ->icon('heroicon-m-shopping-bag')
@@ -42,7 +43,6 @@ class ClienteResource extends Resource
                             ->required()
                             ->maxLength(20),
                         Forms\Components\TextInput::make('inscricao_estadual')
-                            ->required()
                             ->maxLength(20),
                         Forms\Components\TextInput::make('email')
                             ->label('E-mail')
@@ -53,8 +53,35 @@ class ClienteResource extends Resource
                             ->label('Telefone')
                             ->tel()
                             ->required(),
-                    ]),
+                        Forms\Components\Select::make('grupo_economico_id')
+                            ->relationship('grupo_economico', 'nome')
+                            ->searchable()
+                            ->preload(),
 
+                    ]),
+                Forms\Components\Section::make('Informações comerciais')
+                    ->columns(2)
+                    ->description('Endereço e contatos comerciais')
+                    ->collapsible()
+                    ->icon('heroicon-m-shopping-bag')
+                    ->schema([
+                        Forms\Components\TextInput::make('end_endereco')
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('end_numero')
+                            ->maxLength(10),
+                        Forms\Components\TextInput::make('end_complemento')
+                            ->maxLength(50),
+                        Forms\Components\TextInput::make('end_bairro')
+                            ->maxLength(50),
+                        Forms\Components\TextInput::make('end_cep')
+                            ->maxLength(9),
+                        Forms\Components\TextInput::make('end_uf')
+                            ->maxLength(2),
+                        Forms\Components\Select::make('end_cidade_id')
+                            ->relationship('cidade', 'nome')
+                            ->searchable()
+                            ->preload(),
+                    ]),
             ]);
     }
 

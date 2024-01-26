@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Cidade;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class CidadeSeeder extends Seeder
@@ -15,11 +14,20 @@ class CidadeSeeder extends Seeder
     {
         Cidade::create([
             'nome' => 'Salvador',
-            'uf' => 'BA'
+            'uf_id' => 1,
         ]);
         Cidade::create([
             'nome' => 'Jequié',
-            'uf' => 'BA'
+            'uf_id' => 1,
         ]);
+        Cidade::create([
+            'nome' => 'Aracaju',
+            'uf_id' => 2,
+        ]);
+        Cidade::create([
+            'nome' => 'São Paulo',
+            'uf_id' => 3,
+        ]);
+
     }
 }

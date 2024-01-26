@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('cidades', function (Blueprint $table) {
+        Schema::create('grupos_economicos', function (Blueprint $table) {
             $table->id();
-            $table->string('nome');
-            $table->foreignId('uf_id')->nullable()->constrained('ufs')->cascadeOnDelete();
+            $table->string('nome')->unique();
             $table->timestamps();
         });
     }
@@ -24,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('cidades');
+        Schema::dropIfExists('grupos_economicos');
     }
 };

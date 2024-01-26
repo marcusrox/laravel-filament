@@ -71,6 +71,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             PermissionSeeder::class,
             CategoriaSeeder::class,
+            UfSeeder::class,
+            CidadeSeeder::class,
         ]);
     }
 }

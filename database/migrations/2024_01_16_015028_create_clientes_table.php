@@ -19,6 +19,8 @@ return new class extends Migration
             $table->enum('tipo_pessoa', ['F', 'J']);
             $table->string('cpf_cnpj');
             $table->string('inscricao_estadual')->nullable();
+            $table->foreignId('grupo_economico_id')->nullable()->constrained('grupos_economicos')->cascadeOnDelete();
+
             $table->string('end_endereco')->nullable();
             $table->string('end_numero')->nullable();
             $table->string('end_complemento')->nullable();
