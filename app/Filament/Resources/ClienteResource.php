@@ -32,6 +32,7 @@ class ClienteResource extends Resource
                             ->required()
                             ->maxLength(255),
                         Forms\Components\TextInput::make('razao_social')
+                            ->label('Razão Social')
                             ->required()
                             ->maxLength(255),
                         Forms\Components\Select::make('tipo_pessoa')
@@ -40,20 +41,14 @@ class ClienteResource extends Resource
                                 'F' => 'Física',
                             ]),
                         Forms\Components\TextInput::make('cpf_cnpj')
+                            ->label('CPF/CNPJ')
                             ->required()
                             ->maxLength(20),
                         Forms\Components\TextInput::make('inscricao_estadual')
+                            ->label('Insc. Estadual')
                             ->maxLength(20),
-                        Forms\Components\TextInput::make('email')
-                            ->label('E-mail')
-                            ->email()
-                            ->required()
-                            ->maxLength(255),
-                        Forms\Components\TextInput::make('telefone')
-                            ->label('Telefone')
-                            ->tel()
-                            ->required(),
                         Forms\Components\Select::make('grupo_economico_id')
+                            ->label('Grupo Econômico')
                             ->relationship('grupo_economico', 'nome')
                             ->searchable()
                             ->preload(),
@@ -63,24 +58,65 @@ class ClienteResource extends Resource
                     ->columns(2)
                     ->description('Endereço e contatos comerciais')
                     ->collapsible()
-                    ->icon('heroicon-m-shopping-bag')
+                    ->collapsed()
+                    ->icon('heroicon-m-building-storefront')
                     ->schema([
                         Forms\Components\TextInput::make('end_endereco')
+                            ->label('Endereço')
                             ->maxLength(255),
                         Forms\Components\TextInput::make('end_numero')
+                            ->label('Número')
                             ->maxLength(10),
                         Forms\Components\TextInput::make('end_complemento')
+                            ->label('Complemento')
                             ->maxLength(50),
                         Forms\Components\TextInput::make('end_bairro')
+                            ->label('Bairro')
                             ->maxLength(50),
                         Forms\Components\TextInput::make('end_cep')
+                            ->label('CEP')
                             ->maxLength(9),
-                        Forms\Components\TextInput::make('end_uf')
-                            ->maxLength(2),
+                        Forms\Components\Select::make('end_uf_id')
+                            ->label('UF')
+                            ->relationship('uf', 'nome')
+                            ->searchable()
+                            ->preload(),
                         Forms\Components\Select::make('end_cidade_id')
+                            ->label('Cidade')
                             ->relationship('cidade', 'nome')
                             ->searchable()
                             ->preload(),
+                        Forms\Components\TextInput::make('nome_contato')
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('email')
+                            ->label('E-mail')
+                            ->email()
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('telefone')
+                            ->tel(),
+                        Forms\Components\TextInput::make('celular')
+                            ->tel(),
+                    ]),
+                Forms\Components\Section::make('Informações financeiras')
+                    ->columns(2)
+                    ->description('Endereço e contatos financeiros')
+                    ->collapsible()
+                    ->collapsed()
+                    ->icon('heroicon-m-banknotes')
+                    ->schema([
+                        Forms\Components\TextInput::make('nome_contato_cobranca')
+                            ->label('Nome contato')
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('email_cobranca')
+                            ->label('E-mail')
+                            ->email()
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('telefone_cobranca')
+                            ->label('Telefone')
+                            ->tel(),
+                        Forms\Components\TextInput::make('celular_cobranca')
+                            ->label('Celular')
+                            ->tel(),
                     ]),
             ]);
     }

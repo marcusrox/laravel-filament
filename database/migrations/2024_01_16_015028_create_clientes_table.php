@@ -26,9 +26,10 @@ return new class extends Migration
             $table->string('end_complemento')->nullable();
             $table->string('end_bairro')->nullable();
             $table->string('end_cep')->nullable();
-            $table->string('end_uf')->nullable();
+            $table->foreignId('end_uf_id')->nullable()->constrained('ufs')->cascadeOnDelete();
             $table->foreignId('end_cidade_id')->nullable()->constrained('cidades')->cascadeOnDelete();
 
+            $table->string('nome_contato')->nullable();
             $table->string('telefone')->nullable();
             $table->string('celular')->nullable();
             $table->string('email');
@@ -38,7 +39,7 @@ return new class extends Migration
             $table->string('end_cob_complemento')->nullable();
             $table->string('end_cob_bairro')->nullable();
             $table->string('end_cob_cep')->nullable();
-            $table->string('end_cob_uf')->nullable();
+            $table->foreignId('end_cob_uf_id')->nullable()->constrained('ufs')->cascadeOnDelete();
             $table->foreignId('end_cob_cidade_id')->nullable()->constrained('cidades')->cascadeOnDelete();
 
             $table->string('nome_contato_cobranca')->nullable();
