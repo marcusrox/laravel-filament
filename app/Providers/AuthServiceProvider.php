@@ -31,10 +31,10 @@ class AuthServiceProvider extends ServiceProvider
                 //     'email' => 'suporte@idevs.com.br',
                 //     'password' => Hash::make('12345678'),
                 // ]);
-                $user = \App\Models\User::find(1);
-                if ($user) {
-                    Auth::login($user);
-                }
+                // $user = \App\Models\User::find(1);
+                // if ($user) {
+                //     Auth::login($user);
+                // }
             }
         }
 
