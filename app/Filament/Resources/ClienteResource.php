@@ -9,6 +9,8 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 
 class ClienteResource extends Resource
 {
@@ -150,7 +152,7 @@ class ClienteResource extends Resource
     public static function getRelations(): array
     {
         return [
-//
+            //
         ];
     }
 
@@ -161,5 +163,16 @@ class ClienteResource extends Resource
             'create' => Pages\CreateCliente::route('/create'),
             'edit' => Pages\EditCliente::route('/{record}/edit'),
         ];
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        if (auth()->user()->hasRole('Vendedor')) {
+            // $vendedor = Vendedor::where
+            return parent::getEloquentQuery()->where('id', 1);
+        }
+
+
+        return parent::getEloquentQuery();
     }
 }

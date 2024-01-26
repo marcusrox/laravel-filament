@@ -17,7 +17,10 @@ class TransportadoraResource extends Resource
 {
     protected static ?string $model = Transportadora::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-truck';
+
+    protected static ?string $navigationLabel = 'Transportadoras';
+    protected static ?string $navigationGroup = "Cadastros";
 
     public static function form(Form $form): Form
     {

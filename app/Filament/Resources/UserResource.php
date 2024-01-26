@@ -28,21 +28,24 @@ class UserResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
+            ->extraAttributes($attributes = ['autocomplete' => 'off'])
             ->schema([
                 Forms\Components\TextInput::make('name')
+                    ->label('Nome')
                     ->placeholder('Nome completo')
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('email')
-                    ->label('Email address')
+                    ->label('E-mail')
                     ->autocomplete(false)
                     ->email()
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('password')
+                    ->label('Senha')
                     ->password()
                     ->revealable()
-                    ->autocomplete(false)
+                    ->autocomplete('off')
                     ->required(fn (string $context): bool => $context === 'create') // Só vai exisgir preenchimento se for na criação
                     ->dehydrated(fn ($state) => filled($state)), // Na edição, se campo não fornenecido, não vai alterar pra vazio
                 // Forms\Components\Toggle::make('active')
@@ -120,6 +123,6 @@ class UserResource extends Resource
     // public static function canCreate(): bool
     // {
     //     return true;
-    // } 
+    // }
 
 }
