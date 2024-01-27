@@ -7,7 +7,11 @@ use App\Models\Vendedor;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use Filament\Support\RawJs;
 use Filament\Tables;
+use Filament\Tables\Columns\BooleanColumn;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -19,6 +23,7 @@ class VendedorResource extends Resource
     protected static ?string $navigationLabel = "Vendedores";
     protected static ?string $label = "vendedor";
     protected static ?string $pluralLabel = "vendedores";
+    protected static ?string $navigationGroup = "Cadastros";
 
     public static function form(Form $form): Form
     {
@@ -39,11 +44,21 @@ class VendedorResource extends Resource
                             ->maxLength(255),
                         Forms\Components\TextInput::make('cpf_cnpj')
                             ->label('CPF/CNPJ')
+                            //->mask('999.999.999-99')
+                            ->mask(RawJs::make(<<<'JS'
+                                    ($input.length <= 14) ? '999.999.999-99' : '99.999.999/9999-99'
+                                JS))
                             ->required()
                             ->maxLength(20),
                         Forms\Components\TextInput::make('comissao')
                             ->numeric(),
                         Forms\Components\TextInput::make('dados_bancarios')
+                            ->label('Dados Bancários'),
+                        Forms\Components\Radio::make('ativo')
+                            ->boolean()
+                            ->default(true)
+                            ->inline()
+                            ->inlineLabel(false),
                     ]),
                 Forms\Components\Section::make('Informações de contato')
                     ->columns(2)
@@ -95,8 +110,14 @@ class VendedorResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id')->searchable()->sortable(),
-                Tables\Columns\TextColumn::make('nome')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('id')
+                    ->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('nome')
+                    ->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('cpf_cnpj')
+                    ->label('CPF/CNPJ')->searchable()->sortable(),
+                Tables\Columns\IconColumn::make('ativo')
+                    ->sortable()->boolean(),
             ])
             ->filters([
                 //

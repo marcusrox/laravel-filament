@@ -23,7 +23,7 @@ class PatientResource extends Resource
     protected static ?string $navigationGroup = "Cadastros";
     //protected static ?string $navigationParentItem = 'Produtos';
 
-    //protected static bool $shouldRegisterNavigation = false;
+    protected static bool $shouldRegisterNavigation = false;
 
     public static function form(Form $form): Form
     {
@@ -33,11 +33,11 @@ class PatientResource extends Resource
                     ->required()
                     ->maxLength(255),
                 Forms\Components\Select::make('type')
-                ->options([
-                    'cat' => 'Cat',
-                    'dog' => 'Dog',
-                    'rabbit' => 'Rabbit',
-                ])
+                    ->options([
+                        'cat' => 'Cat',
+                        'dog' => 'Dog',
+                        'rabbit' => 'Rabbit',
+                    ])
                     ->required(),
                 Forms\Components\DatePicker::make('date_of_birth')
                     ->required()
@@ -80,11 +80,11 @@ class PatientResource extends Resource
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('type')
-                ->options([
-                    'cat' => 'Cat',
-                    'dog' => 'Dog',
-                    'rabbit' => 'Rabbit',
-                ]),
+                    ->options([
+                        'cat' => 'Cat',
+                        'dog' => 'Dog',
+                        'rabbit' => 'Rabbit',
+                    ]),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

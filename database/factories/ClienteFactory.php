@@ -26,8 +26,7 @@ class ClienteFactory extends Factory
 
             'email' => fake()->unique()->safeEmail(),
             'telefone' => fake()->phoneNumber(),
-
+            'vendedor_id' => 1,
         ];
     }
-
 }

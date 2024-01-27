@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('vendedores', function (Blueprint $table) {
+            $table->id();
             $table->string('nome');
             $table->string('razao_social')->nullable();
             $table->string('cpf_cnpj')->nullable();
@@ -29,10 +30,10 @@ return new class extends Migration
             $table->string('celular')->nullable();
             $table->string('dados_bancarios')->nullable();
 
-            $table->boolean('ativo');
+            $table->boolean('ativo')->default(1);
 
             $table->foreignId('user_id')->nullable()->constrained('users')->cascadeOnDelete();
-            $table->id();
+
             $table->timestamps();
         });
     }

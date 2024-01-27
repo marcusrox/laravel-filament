@@ -6,10 +6,13 @@ use App\Casts\MoneyCast;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Treatment extends Model
 {
     use HasFactory;
+    use LogsActivity;
 
     protected $casts = [
         'price' => MoneyCast::class,
@@ -19,6 +22,11 @@ class Treatment extends Model
     {
         return $this->belongsTo(Patient::class);
     }
-    
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logFillable();
+    }
 
 }

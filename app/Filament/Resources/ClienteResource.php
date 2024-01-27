@@ -4,9 +4,11 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\ClienteResource\Pages;
 use App\Models\Cliente;
+use App\Models\Vendedor;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use Filament\Support\RawJs;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -22,6 +24,8 @@ class ClienteResource extends Resource
 
     public static function form(Form $form): Form
     {
+        /** @var \App\Models\User */
+        $user = auth()->user();
         return $form
             ->schema([
                 Forms\Components\Section::make('Informações do Cliente')
@@ -44,6 +48,9 @@ class ClienteResource extends Resource
                             ]),
                         Forms\Components\TextInput::make('cpf_cnpj')
                             ->label('CPF/CNPJ')
+                            ->mask(RawJs::make(<<<'JS'
+                                    ($input.length <= 14) ? '999.999.999-99' : '99.999.999/9999-99'
+                                JS))
                             ->required()
                             ->maxLength(20),
                         Forms\Components\TextInput::make('inscricao_estadual')
@@ -120,6 +127,12 @@ class ClienteResource extends Resource
                             ->label('Celular')
                             ->tel(),
                     ]),
+                Forms\Components\Select::make('vendedor_id')
+                    ->visible(!$user->is_vendedor())
+                    ->label('Vendedor')
+                    ->relationship('vendedor', 'nome')
+                    ->searchable()
+                    ->preload(),
             ]);
     }
 
@@ -167,11 +180,14 @@ class ClienteResource extends Resource
 
     public static function getEloquentQuery(): Builder
     {
-        if (auth()->user()->hasRole('Vendedor')) {
-            // $vendedor = Vendedor::where
-            return parent::getEloquentQuery()->where('id', 1);
-        }
-
+        /** @var \App\Models\User */
+        $user = auth()->user();
+        // if ($user->hasRole('Vendedor')) {
+        //     // Se o usuário logado for um vendedor, fechar escopo de vendedores
+        //     $vendedor = Vendedor::whereUserId($user->id)->first();
+        //     dd($vendedor);
+        //     return parent::getEloquentQuery()->where('vendedor_id', 1);
+        // }
 
         return parent::getEloquentQuery();
     }

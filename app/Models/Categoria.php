@@ -29,9 +29,9 @@ class Categoria extends Model
             $model->slug = Str::slug($model->nome);
         });
         self::deleting(function ($model) {
-
         });
     }
+
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()

@@ -8,15 +8,19 @@ use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
 use Filament\Panel\Concerns\HasAvatars;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
-use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Support\Str;
+use Laravel\Sanctum\HasApiTokens;
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements FilamentUser
 {
     use HasApiTokens, HasFactory, Notifiable, HasRoles, HasAvatars;
+    use LogsActivity;
 
     /**
      * The attributes that are mass assignable.
@@ -59,5 +63,19 @@ class User extends Authenticatable implements FilamentUser
         return $this->avatar_url;
     }
 
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logFillable();
+    }
 
+    public function is_vendedor(): bool
+    {
+        return $this->vendedor()->get()->count() > 0;
+    }
+
+    public function vendedor(): HasOne
+    {
+        return $this->hasOne(Vendedor::class, 'user_id');
+    }
 }

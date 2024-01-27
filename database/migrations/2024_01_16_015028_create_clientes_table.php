@@ -32,7 +32,7 @@ return new class extends Migration
             $table->string('nome_contato')->nullable();
             $table->string('telefone')->nullable();
             $table->string('celular')->nullable();
-            $table->string('email');
+            $table->string('email')->nullable();
 
             $table->string('end_cob_endereco')->nullable();
             $table->string('end_cob_numero')->nullable();
@@ -50,6 +50,8 @@ return new class extends Migration
             $table->boolean('bloqueado')->default(0);
             $table->string('motivo_bloqueio')->nullable();
             $table->unsignedInteger('vl_limite_credito')->nullable();
+
+            $table->foreignId('vendedor_id')->constrained('vendedores')->cascadeOnDelete();
 
             $table->timestamps();
         });
