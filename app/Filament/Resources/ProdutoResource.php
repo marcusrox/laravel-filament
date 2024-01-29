@@ -3,10 +3,12 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ProdutoResource\Pages;
+use App\Forms\Components\Money;
 use App\Models\Produto;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use Filament\Support\RawJs;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Support\Str;
@@ -34,11 +36,20 @@ class ProdutoResource extends Resource
                     ->maxLength(255),
                 Forms\Components\TextInput::make('descricao')
                     ->maxLength(255),
-                Forms\Components\TextInput::make('preco')
-                    ->required()
-                    ->numeric()
+
+                Forms\Components\TextInput::make('preco_custo')
+                    ->label('Preço de Custo')
+                    ->mask(RawJs::make('$money($input,  \',\')'))
+
                     ->prefix('R$')
-                    ->maxValue(42949672.95),
+                    ->required(),
+
+                // Forms\Components\TextInput::make('preco_custo')
+                //     ->required()
+                //     ->mask('money')
+                //     ->numeric()
+                //     ->prefix('R$')
+                //     ->maxValue(42949672.95),
                 Forms\Components\TextInput::make('qtd_estoque')
                     ->required()
                     ->numeric(),
@@ -80,7 +91,7 @@ class ProdutoResource extends Resource
                 Tables\Columns\TextColumn::make('nome')
                     ->sortable()
                     ->searchable(),
-                Tables\Columns\TextColumn::make('preco')
+                Tables\Columns\TextColumn::make('preco_custo')
                     ->money('BRL')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('qtd_estoque')

@@ -16,7 +16,7 @@ class Produto extends Model
     use LogsActivity;
 
     protected $casts = [
-        'preco' => MoneyCast::class,
+        'preco_custo' => MoneyCast::class,
     ];
 
     public function fornecedor(): BelongsTo

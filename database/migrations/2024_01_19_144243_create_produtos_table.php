@@ -21,6 +21,8 @@ return new class extends Migration
             $table->foreignId('fornecedor_id')->nullable()->unique()->constrained('fornecedores')->cascadeOnDelete();
 
             $table->integer('preco_custo');
+            $table->integer('preco_venda');
+            $table->integer('preco_venda_min');
             $table->integer('qtd_estoque')->default(0);
             $table->integer('qtd_estoque_min')->default(0);
             $table->boolean('ativo')->default(true);
