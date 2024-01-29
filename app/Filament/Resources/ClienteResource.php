@@ -142,6 +142,7 @@ class ClienteResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('id')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('nome')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('cpf_cnpj')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('telefone')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime('d/m/Y H:i:s')

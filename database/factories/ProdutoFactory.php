@@ -18,6 +18,7 @@ class ProdutoFactory extends Factory
     public function definition(): array
     {
         $name = fake()->words(asText: true);
+        $preco = rand(50, 1000);
         return [
             'nome' => $name,
             'nome_curto' => $name,
@@ -25,7 +26,9 @@ class ProdutoFactory extends Factory
             'ncm' => Str::slug($name),
             'slug' => Str::slug($name),
             'descricao' => fake()->sentence(),
-            'preco_custo' => rand(10, 1000),
+            'preco_custo' => $preco - 40,
+            'preco_venda' => $preco,
+            'preco_venda_min' => $preco - 10,
             'qtd_estoque' => rand(0, 100),
             'qtd_estoque_min' => rand(0, 10),
 
