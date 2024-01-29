@@ -1,33 +1,18 @@
 <?php
 
 return [
-
-    'title' => 'Painel de Controle',
-
+    'title' => 'Dashboard',
     'actions' => [
-
         'filter' => [
-
             'label' => 'Filtros',
-
             'modal' => [
-
                 'heading' => 'Filtros',
-
                 'actions' => [
-
                     'apply' => [
-
                         'label' => 'Aplicar',
-
                     ],
-
                 ],
-
             ],
-
         ],
-
     ],
-
 ];
