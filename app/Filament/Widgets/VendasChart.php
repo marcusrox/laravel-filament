@@ -11,16 +11,17 @@ use Flowframe\Trend\TrendValue;
 class VendasChart extends ChartWidget
 {
     protected static ?string $heading = 'Vendas';
+    protected static ?int $sort = 1;
 
     protected function getData(): array
     {
         $data = Trend::model(Venda::class)
-        ->between(
-            start: now()->subYear(),
-            end: now(),
-        )
-        ->perMonth()
-        ->count();
+            ->between(
+                start: now()->subYear(),
+                end: now(),
+            )
+            ->perMonth()
+            ->count();
 
         return [
             'datasets' => [

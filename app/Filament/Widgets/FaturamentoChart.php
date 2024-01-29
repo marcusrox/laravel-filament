@@ -7,24 +7,25 @@ use Filament\Widgets\ChartWidget;
 use Flowframe\Trend\Trend;
 use Flowframe\Trend\TrendValue;
 
-class TreatmentsChart extends ChartWidget
+class FaturamentoChart extends ChartWidget
 {
-    protected static ?string $heading = 'Treatments';
+    protected static ?string $heading = 'Faturamento';
+    protected static ?int $sort = 2;
 
     protected function getData(): array
     {
         $data = Trend::model(Treatment::class)
-        ->between(
-            start: now()->subYear(),
-            end: now(),
-        )
-        ->perMonth()
-        ->count();
+            ->between(
+                start: now()->subYear(),
+                end: now(),
+            )
+            ->perMonth()
+            ->count();
 
         return [
             'datasets' => [
                 [
-                    'label' => 'Treatments',
+                    'label' => 'Faturamento',
                     'data' => $data->map(fn (TrendValue $value) => $value->aggregate),
                 ],
             ],

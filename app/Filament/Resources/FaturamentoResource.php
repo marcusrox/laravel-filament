@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\VendaResource\Pages;
-use App\Filament\Resources\VendaResource\RelationManagers;
-use App\Models\Venda;
+use App\Filament\Resources\FaturamentoResource\Pages;
+use App\Filament\Resources\FaturamentoResource\RelationManagers;
+use App\Models\Faturamento;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,11 +13,11 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class VendaResource extends Resource
+class FaturamentoResource extends Resource
 {
-    protected static ?string $model = Venda::class;
+    protected static ?string $model = Faturamento::class;
 
-    protected static ?int $sort = 1;
+    protected static ?int $navigationSort = 2;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -58,9 +58,9 @@ class VendaResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListVendas::route('/'),
-            'create' => Pages\CreateVenda::route('/create'),
-            'edit' => Pages\EditVenda::route('/{record}/edit'),
+            'index' => Pages\ListFaturamentos::route('/'),
+            'create' => Pages\CreateFaturamento::route('/create'),
+            'edit' => Pages\EditFaturamento::route('/{record}/edit'),
         ];
     }
 }

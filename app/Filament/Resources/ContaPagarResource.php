@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\VendaResource\Pages;
-use App\Filament\Resources\VendaResource\RelationManagers;
-use App\Models\Venda;
+use App\Filament\Resources\ContaPagarResource\Pages;
+use App\Filament\Resources\ContaPagarResource\RelationManagers;
+use App\Models\ContaPagar;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,13 +13,14 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class VendaResource extends Resource
+class ContaPagarResource extends Resource
 {
-    protected static ?string $model = Venda::class;
-
-    protected static ?int $sort = 1;
+    protected static ?string $model = ContaPagar::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
+    protected static ?string $navigationLabel = 'Contas a Pagar';
+    protected static ?string $navigationGroup = "Financeiro";
 
     public static function form(Form $form): Form
     {
@@ -58,9 +59,9 @@ class VendaResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListVendas::route('/'),
-            'create' => Pages\CreateVenda::route('/create'),
-            'edit' => Pages\EditVenda::route('/{record}/edit'),
+            'index' => Pages\ListContasPagar::route('/'),
+            'create' => Pages\CreateContaPagar::route('/create'),
+            'edit' => Pages\EditContaPagar::route('/{record}/edit'),
         ];
     }
 }
