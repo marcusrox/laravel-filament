@@ -20,10 +20,15 @@ class ProdutoFactory extends Factory
         $name = fake()->words(asText: true);
         return [
             'nome' => $name,
-            'descricao' => fake()->sentence(),
-            'preco' => rand(10, 1000),
-            'qtd_estoque' => rand(0, 100),
+            'nome_curto' => $name,
+            'codigo' => Str::slug($name),
+            'ncm' => Str::slug($name),
             'slug' => Str::slug($name),
+            'descricao' => fake()->sentence(),
+            'preco_custo' => rand(10, 1000),
+            'qtd_estoque' => rand(0, 100),
+            'qtd_estoque_min' => rand(0, 10),
+
         ];
     }
 }

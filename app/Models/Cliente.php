@@ -49,8 +49,10 @@ class Cliente extends Model
         self::creating(function ($model) {
             /** @var \App\Models\User */
             $user = auth()->user();
-            // Se usuário criando cliente for um vendedor, setar o vendedor_id
-            $model->vendedor_id = $user->vendedor()->first()->id;
+            if ($user) {
+                // Se usuário criando cliente for um vendedor, setar o vendedor_id
+                $model->vendedor_id = $user->vendedor()->first()->id;
+            }
         });
         self::updating(function ($model) {
             //

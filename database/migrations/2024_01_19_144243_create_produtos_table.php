@@ -13,12 +13,20 @@ return new class extends Migration
     {
         Schema::create('produtos', function (Blueprint $table) {
             $table->id();
+            $table->string('codigo')->unique();
             $table->string('nome')->unique();
-            $table->string('descricao')->nullable();
-            $table->integer('preco');
-            $table->integer('qtd_estoque');
+            $table->string('nome_curto')->unique()->nullable();
+            $table->string('ncm')->unique()->nullable();
             $table->string('slug');
+            $table->foreignId('fornecedor_id')->nullable()->unique()->constrained('fornecedores')->cascadeOnDelete();
+
+            $table->integer('preco_custo');
+            $table->integer('qtd_estoque')->default(0);
+            $table->integer('qtd_estoque_min')->default(0);
+            $table->boolean('ativo')->default(true);
+
             $table->string('foto')->nullable();
+            $table->string('descricao')->nullable();
             $table->timestamps();
         });
     }
