@@ -13,13 +13,12 @@ class CategoriaSeeder extends Seeder
     public function run(): void
     {
         Categoria::create([
-            'nome' => 'Eletrônicos',
-            'slug' => 'eletronicos',
+            'nome' => 'Categoria 01',
+            'slug' => 'categoria-01',
         ]);
         Categoria::create([
-            'nome' => 'Climatizadores',
-            'slug' => 'climatizadores',
+            'nome' => 'Categoria 02',
+            'slug' => 'categoria-02',
         ]);
-
     }
 }

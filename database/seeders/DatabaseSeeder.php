@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             UfSeeder::class,
             CidadeSeeder::class,
             VendedorSeeder::class,
+            FornecedorSeeder::class,
         ]);
 
         \App\Models\User::factory(10)->create();

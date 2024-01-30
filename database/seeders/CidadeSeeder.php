@@ -14,20 +14,19 @@ class CidadeSeeder extends Seeder
     {
         Cidade::create([
             'nome' => 'Salvador',
-            'uf_id' => 1,
+            'uf_id' => 5,
         ]);
         Cidade::create([
             'nome' => 'Jequié',
-            'uf_id' => 1,
+            'uf_id' => 5,
         ]);
         Cidade::create([
             'nome' => 'Aracaju',
-            'uf_id' => 2,
+            'uf_id' => 25,
         ]);
         Cidade::create([
             'nome' => 'São Paulo',
-            'uf_id' => 3,
+            'uf_id' => 24,
         ]);
-
     }
 }

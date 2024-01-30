@@ -25,13 +25,13 @@ class ProdutoFactory extends Factory
             'codigo' => Str::slug($name),
             'ncm' => Str::slug($name),
             'slug' => Str::slug($name),
-            'descricao' => fake()->sentence(),
+
             'preco_custo' => $preco - 40,
             'preco_venda' => $preco,
             'preco_venda_min' => $preco - 10,
             'qtd_estoque' => rand(0, 100),
             'qtd_estoque_min' => rand(0, 10),
-
+            'descricao_detalhada' => fake()->sentence(),
         ];
     }
 }

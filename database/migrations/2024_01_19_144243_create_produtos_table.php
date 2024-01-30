@@ -25,10 +25,15 @@ return new class extends Migration
             $table->integer('preco_venda_min');
             $table->integer('qtd_estoque')->default(0);
             $table->integer('qtd_estoque_min')->default(0);
+
+            $table->integer('caixa_master')->default(0);
+            $table->integer('medida_caixa_master')->default(0);
+            $table->integer('peso_liquido')->default(0);
+
             $table->boolean('ativo')->default(true);
 
             $table->string('foto')->nullable();
-            $table->string('descricao')->nullable();
+            $table->string('descricao_detalhada')->nullable();
             $table->timestamps();
         });
     }

@@ -25,6 +25,10 @@ class ProdutoResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\TextInput::make('codigo')
+                    ->maxLength(50),
+                Forms\Components\TextInput::make('ncm')
+                    ->maxLength(50),
                 Forms\Components\TextInput::make('nome')
                     ->reactive() // <<---- IMPORTANTE
                     ->afterStateUpdated(function ($state, $set) {
@@ -34,26 +38,55 @@ class ProdutoResource extends Resource
                     ->required()
                     ->autocomplete(false)
                     ->maxLength(255),
-                Forms\Components\TextInput::make('descricao')
-                    ->maxLength(255),
+                Forms\Components\TextInput::make('nome_curto')
+                    ->maxLength(50),
 
+                Forms\Components\TextInput::make('slug')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\Select::make('fornecedor_id')
+                    ->relationship('fornecedor', 'nome')
+                    ->searchable()
+                    ->preload()
+                    ->required(),
                 Forms\Components\TextInput::make('preco_custo')
                     ->label('Preço de Custo')
                     ->mask(RawJs::make('$money($input,  \',\')'))
-
                     ->prefix('R$')
                     ->required(),
-
+                Forms\Components\TextInput::make('preco_venda')
+                    ->label('Preço de Venda')
+                    ->mask(RawJs::make('$money($input,  \',\')'))
+                    ->prefix('R$')
+                    ->required(),
+                Forms\Components\TextInput::make('preco_venda_min')
+                    ->label('Preço Mínimo de Venda')
+                    ->mask(RawJs::make('$money($input,  \',\')'))
+                    ->prefix('R$')
+                    ->required(),
                 // Forms\Components\TextInput::make('preco_custo')
                 //     ->required()
                 //     ->mask('money')
                 //     ->numeric()
                 //     ->prefix('R$')
                 //     ->maxValue(42949672.95),
-                Forms\Components\TextInput::make('qtd_estoque')
-                    ->required()
+                Forms\Components\TextInput::make('peso_liquido')
                     ->numeric(),
 
+                Forms\Components\TextInput::make('qtd_estoque')
+                    ->numeric(),
+                Forms\Components\TextInput::make('qtd_estoque_min')
+                    ->numeric(),
+                Forms\Components\TextInput::make('caixa_master')
+                    ->numeric(),
+                Forms\Components\TextInput::make('medida_caixa_master')
+                    ->numeric(),
+
+                Forms\Components\Radio::make('ativo')
+                    ->boolean()
+                    ->default(true)
+                    ->inline()
+                    ->inlineLabel(false),
                 // Forms\Components\Select::make('categories')
                 //     ->multiple()
                 //     ->preload()
@@ -70,15 +103,11 @@ class ProdutoResource extends Resource
                             ->maxLength(255),
                     ])
                     ->required(),
-
-                Forms\Components\TextInput::make('slug')
-                    ->required()
-                    ->maxLength(255),
-
                 Forms\Components\FileUpload::make('foto')
                     ->image() // faz validação se upload é imagem
                     ->directory('produtos'), // Directory dentro de public
-
+                Forms\Components\TextInput::make('descricao_detalhada')
+                    ->maxLength(50),
             ]);
     }
 
