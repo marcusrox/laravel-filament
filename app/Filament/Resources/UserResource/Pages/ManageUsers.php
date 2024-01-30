@@ -19,11 +19,11 @@ class ManageUsers extends ManageRecords
     public function getTabs(): array
     {
         return [
-            'all' => Tab::make()->icon('heroicon-m-user-group'),
-            'active' => Tab::make()
+            'todos' => Tab::make()->icon('heroicon-m-user-group'),
+            'Ativos' => Tab::make()
                 ->badge(User::query()->where('active', true)->count())
                 ->modifyQueryUsing(fn (Builder $query) => $query->where('active', true)),
-            'inactive' => Tab::make()
+            'Inativos' => Tab::make()
                 ->badge(User::query()->where('active', false)->count())
                 ->modifyQueryUsing(fn (Builder $query) => $query->where('active', false)),
         ];

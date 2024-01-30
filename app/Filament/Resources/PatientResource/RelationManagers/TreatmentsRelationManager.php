@@ -18,17 +18,17 @@ class TreatmentsRelationManager extends RelationManager
     {
         return $form
             ->schema([
-            Forms\Components\TextInput::make('description')
-                ->required()
-                ->maxLength(255)
-                ->columnSpan('full'),
-            Forms\Components\Textarea::make('notes')
-                ->maxLength(65535)
-                ->columnSpan('full'),
-            Forms\Components\TextInput::make('price')
-                ->numeric()
-                ->prefix('R$')
-                ->maxValue(42949672.95),
+                Forms\Components\TextInput::make('description')
+                    ->required()
+                    ->maxLength(255)
+                    ->columnSpan('full'),
+                Forms\Components\Textarea::make('notes')
+                    ->maxLength(65535)
+                    ->columnSpan('full'),
+                Forms\Components\TextInput::make('price')
+                    ->numeric()
+                    ->prefix('R$')
+                    ->maxValue(42949672.95),
             ]);
     }
 
@@ -42,7 +42,7 @@ class TreatmentsRelationManager extends RelationManager
                     ->money('BRL')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime(),
+                    ->dateTime('d/m/Y H:i:s'),
             ])
             ->filters([
                 //

@@ -116,11 +116,11 @@ class ProdutoResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\ImageColumn::make('foto'),
-                Tables\Columns\TextColumn::make('id')->sortable(),
+                Tables\Columns\TextColumn::make('id')->sortable()->label('ID'),
                 Tables\Columns\TextColumn::make('nome')
                     ->sortable()
                     ->searchable(),
-                Tables\Columns\TextColumn::make('preco_custo')
+                Tables\Columns\TextColumn::make('preco_custo')->label('Preço de Custo')
                     ->money('BRL')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('qtd_estoque')

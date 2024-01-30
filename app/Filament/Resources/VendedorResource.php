@@ -110,12 +110,12 @@ class VendedorResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id')
+                Tables\Columns\TextColumn::make('id')->label('ID')
                     ->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('nome')
                     ->searchable()->sortable(),
-                Tables\Columns\TextColumn::make('cpf_cnpj')
-                    ->label('CPF/CNPJ')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('cpf_cnpj')->label('CPF/CNPJ')
+                    ->searchable()->sortable(),
                 Tables\Columns\IconColumn::make('ativo')
                     ->sortable()->boolean(),
             ])

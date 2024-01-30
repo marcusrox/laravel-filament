@@ -47,7 +47,7 @@ class CategoriaResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id')
+                Tables\Columns\TextColumn::make('id')->label('ID')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('nome')
                     ->searchable(),
@@ -57,16 +57,16 @@ class CategoriaResource extends Resource
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i:s')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i:s')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-//
+                //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

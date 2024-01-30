@@ -22,6 +22,9 @@ class ContaReceberResource extends Resource
     protected static ?string $navigationLabel = 'Contas a Receber';
     protected static ?string $navigationGroup = "Financeiro";
 
+    protected static ?string $label = "conta a receber";
+    protected static ?string $pluralLabel = "contas a receber";
+
     public static function form(Form $form): Form
     {
         return $form

@@ -20,6 +20,9 @@ class GrupoEconomicoResource extends Resource
     protected static ?string $navigationGroup = "Cadastros";
     protected static ?string $navigationParentItem = 'Clientes';
 
+    protected static ?string $label = "grupo ecônomico";
+    protected static ?string $pluralLabel = "grupos ecônomicos";
+
     public static function form(Form $form): Form
     {
         return $form
@@ -34,15 +37,13 @@ class GrupoEconomicoResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('nome')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
+                Tables\Columns\TextColumn::make('id')->searchable()->sortable()->label('ID'),
+                Tables\Columns\TextColumn::make('nome')->searchable(),
+                Tables\Columns\TextColumn::make('created_at')->sortable()
+                    ->dateTime('d/m/Y H:i:s')
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
+                Tables\Columns\TextColumn::make('updated_at')->sortable()
+                    ->dateTime('d/m/Y H:i:s')
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([

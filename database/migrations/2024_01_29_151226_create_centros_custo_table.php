@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('faturamentos', function (Blueprint $table) {
+        Schema::create('centros_custo', function (Blueprint $table) {
             $table->id();
-
+            $table->string('codigo');
+            $table->string('nome');
+            $table->boolean('ativo')->default(1);
             $table->timestamps();
         });
     }
@@ -23,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('faturamentos');
+        Schema::dropIfExists('centros_custo');
     }
 };

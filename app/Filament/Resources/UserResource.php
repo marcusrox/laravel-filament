@@ -25,6 +25,9 @@ class UserResource extends Resource
     protected static ?string $navigationLabel = 'Usuários';
     protected static ?string $navigationGroup = "Segurança";
 
+    protected static ?string $label = "usuário";
+    protected static ?string $pluralLabel = "usuários";
+
     public static function form(Form $form): Form
     {
         return $form
@@ -54,6 +57,7 @@ class UserResource extends Resource
                 //     ->inlineLabel(false)
                 //     ->default(true),
                 Forms\Components\Radio::make('active')
+                    ->label('Ativo')
                     ->boolean()
                     ->default(true)
                     ->inline()
@@ -61,6 +65,7 @@ class UserResource extends Resource
                 Forms\Components\TextInput::make('avatar_url')
                     ->label('Avatar'),
                 Forms\Components\Select::make('roles')
+                    ->label('Grupos')
                     ->relationship('roles', 'name')
                     ->multiple()
                     ->preload()
@@ -73,11 +78,11 @@ class UserResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\ImageColumn::make('avatar_url')->label('Foto')->circular(),
-                Tables\Columns\TextColumn::make('id')->searchable()->sortable(),
-                Tables\Columns\TextColumn::make('name')->searchable()->sortable(),
-                Tables\Columns\TextColumn::make('email')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('id')->searchable()->sortable()->label('ID'),
+                Tables\Columns\TextColumn::make('name')->searchable()->sortable()->label('Nome'),
+                Tables\Columns\TextColumn::make('email')->searchable()->sortable()->label('E-mail'),
                 //Tables\Columns\IconColumn::make('active')->boolean(),
-                Tables\Columns\ToggleColumn::make('active')->label('Active')->sortable(),
+                Tables\Columns\ToggleColumn::make('active')->label('Active')->sortable()->label('Ativo'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime('d/m/Y H:i:s')
                     ->sortable()

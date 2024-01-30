@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('contas_pagar', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('centro_custo_id')->constrained('centros_custo')->cascadeOnDelete();
             $table->timestamps();
         });
     }

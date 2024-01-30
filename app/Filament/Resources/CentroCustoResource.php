@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\ContaPagarResource\Pages;
-use App\Filament\Resources\ContaPagarResource\RelationManagers;
-use App\Models\ContaPagar;
+use App\Filament\Resources\CentroCustoResource\Pages;
+use App\Filament\Resources\CentroCustoResource\RelationManagers;
+use App\Models\CentroCusto;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,17 +13,16 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class ContaPagarResource extends Resource
+class CentroCustoResource extends Resource
 {
-    protected static ?string $model = ContaPagar::class;
+    protected static ?string $model = CentroCusto::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-
-    protected static ?string $navigationLabel = 'Contas a Pagar';
+    protected static ?string $navigationLabel = 'Centros de Custo';
     protected static ?string $navigationGroup = "Financeiro";
 
-    protected static ?string $label = "conta a pagar";
-    protected static ?string $pluralLabel = "contas a pagar";
+    protected static ?string $label = "centro de custo";
+    protected static ?string $pluralLabel = "centros de custo";
 
     public static function form(Form $form): Form
     {
@@ -37,7 +36,15 @@ class ContaPagarResource extends Resource
     {
         return $table
             ->columns([
-                //
+
+                Tables\Columns\TextColumn::make('codigo')->searchable()->label('Código'),
+                Tables\Columns\TextColumn::make('nome')->searchable(),
+                Tables\Columns\TextColumn::make('created_at')->sortable()
+                    ->dateTime('d/m/Y H:i:s')
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('updated_at')->sortable()
+                    ->dateTime('d/m/Y H:i:s')
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //
@@ -62,9 +69,9 @@ class ContaPagarResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListContasPagar::route('/'),
-            'create' => Pages\CreateContaPagar::route('/create'),
-            'edit' => Pages\EditContaPagar::route('/{record}/edit'),
+            'index' => Pages\ListCentroCustos::route('/'),
+            'create' => Pages\CreateCentroCusto::route('/create'),
+            'edit' => Pages\EditCentroCusto::route('/{record}/edit'),
         ];
     }
 }
