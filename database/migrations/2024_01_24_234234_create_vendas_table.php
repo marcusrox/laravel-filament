@@ -15,10 +15,16 @@ return new class extends Migration
             $table->id();
             $table->foreignId('vendedor_id')->constrained('vendedores')->cascadeOnDelete();
             $table->foreignId('cliente_id')->constrained('clientes')->cascadeOnDelete();
+            $table->foreignId('venda_situacao_id')->constrained('vendas_situacoes')->cascadeOnDelete();
             $table->string('observacao');
             $table->string('numero_pedido');
             $table->enum('tipo_frete', ['FOB', 'CIF']);
+            $table->enum('natureza_operacao', ['VENDA', 'BONIF']);
+            $table->string('prazos_pagamento');
+            $table->bigInteger('pct_comissao');
+            $table->bigInteger('pct_vpc');
             $table->foreignId('transportadora_id')->constrained('transportadoras')->cascadeOnDelete();
+            $table->date('dt_base_faturamento');
 
             $table->timestamps();
         });

@@ -14,6 +14,8 @@ class Categoria extends Model
     use HasFactory;
     use LogsActivity;
 
+    protected $table = 'categorias';
+
     public function produtos(): BelongsToMany
     {
         return $this->belongsToMany(Produto::class);

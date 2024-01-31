@@ -15,7 +15,6 @@ class Vendedor extends Model
 
     protected $table = 'vendedores';
 
-
     public function uf(): BelongsTo
     {
         return $this->belongsTo(Uf::class, 'end_uf_id');

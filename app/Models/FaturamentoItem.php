@@ -7,12 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
-class GrupoEconomico extends Model
+class FaturamentoItem extends Model
 {
     use HasFactory;
     use LogsActivity;
 
-    protected $table = "grupos_economicos";
+    protected $table = 'faturamentos_itens';
 
     public function getActivitylogOptions(): LogOptions
     {

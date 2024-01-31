@@ -13,6 +13,8 @@ class Cliente extends Model
     use HasFactory;
     use LogsActivity;
 
+    protected $table = 'clientes';
+
     public function grupo_economico(): BelongsTo
     {
         return $this->belongsTo(GrupoEconomico::class);

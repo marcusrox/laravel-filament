@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             ContaPagarSeeder::class,
             ContaReceberSeeder::class,
             FaturamentoSeeder::class,
+            VendaSituacaoSeeder::class,
         ]);
 
         \App\Models\User::factory(10)->create();
