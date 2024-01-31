@@ -27,11 +27,11 @@ class DatabaseSeeder extends Seeder
             ContaReceberSeeder::class,
             FaturamentoSeeder::class,
             VendaSituacaoSeeder::class,
+            TransportadoraSeeder::class,
         ]);
 
         \App\Models\User::factory(10)->create();
         \App\Models\Cliente::factory(10)->create();
-        \App\Models\Patient::factory(20)->create();
         \App\Models\Produto::factory(20)->create();
     }
 }

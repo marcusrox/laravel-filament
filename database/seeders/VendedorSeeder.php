@@ -15,9 +15,12 @@ class VendedorSeeder extends Seeder
     public function run(): void
     {
         Vendedor::create([
-            'nome' => 'Vendedor iDev',
-            'user_id' => User::whereName('Vendedor iDev')->first()->id,
-
+            'nome' => 'Vendedor 1',
+            'user_id' => User::whereName('Vendedor 1')->first()->id,
+        ]);
+        Vendedor::create([
+            'nome' => 'Vendedor 2',
+            'user_id' => User::whereName('Vendedor 2')->first()->id,
         ]);
     }
 }

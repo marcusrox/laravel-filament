@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Vendedor;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -11,6 +12,9 @@ use Illuminate\Support\Str;
  */
 class ClienteFactory extends Factory
 {
+
+    protected static ?array $arr_vendedores;
+
     /**
      * Define the model's default state.
      *
@@ -18,6 +22,7 @@ class ClienteFactory extends Factory
      */
     public function definition(): array
     {
+        $arr = static::$arr_vendedores ??= Vendedor::pluck('id')->toArray();
         return [
             'nome' => fake()->name(),
             'razao_social' => fake()->name(),
@@ -26,7 +31,7 @@ class ClienteFactory extends Factory
 
             'email' => fake()->unique()->safeEmail(),
             'telefone' => fake()->phoneNumber(),
-            'vendedor_id' => 1,
+            'vendedor_id' => fake()->randomElement($arr),
         ];
     }
 }
