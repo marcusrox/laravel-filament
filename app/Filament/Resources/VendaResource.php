@@ -41,6 +41,7 @@ class VendaResource extends Resource
                     )
                     ->searchable()
                     ->preload(),
+
                 Forms\Components\Select::make('cliente_id')
                     ->label('Cliente')
                     ->relationship(
@@ -56,13 +57,15 @@ class VendaResource extends Resource
                     ->getOptionLabelFromRecordUsing(fn (Cliente $record) => "{$record->cpf_cnpj} - {$record->nome}")
                     ->searchable()
                     ->preload(),
+
                 Forms\Components\Select::make('tipo_frete')->options(Venda::opt_tipo_frete),
                 Forms\Components\Select::make('natureza_operacao')->options(Venda::opt_natureza_operacao),
                 Forms\Components\Textarea::make('observacao'),
                 Forms\Components\TextInput::make('numero_pedido'),
                 Forms\Components\TextInput::make('pct_comissao')->numeric()->maxValue(100),
                 Forms\Components\TextInput::make('pct_vpc')->numeric()->maxValue(100),
-                Forms\Components\TextInput::make('prazos_pagamento'),
+                Forms\Components\TextInput::make('prazos_pagamento')
+                    ->placeholder('Exemplo 30/60/90/120'),
                 Forms\Components\Select::make('transportadora_id')
                     ->relationship('transportadora', 'nome')
                     ->searchable()
