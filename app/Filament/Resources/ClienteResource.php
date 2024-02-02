@@ -3,15 +3,20 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ClienteResource\Pages;
+use App\Models\Cidade;
 use App\Models\Cliente;
+use App\Models\Uf;
 use App\Models\Vendedor;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
+use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Support\RawJs;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 
 class ClienteResource extends Resource
@@ -89,11 +94,16 @@ class ClienteResource extends Resource
                             ->label('UF')
                             ->relationship('uf', 'nome')
                             ->searchable()
+                            ->live()
+                            ->afterStateUpdated(fn (Set $set) => $set('end_cidade_id', null))
                             ->preload(),
                         Forms\Components\Select::make('end_cidade_id')
                             ->label('Cidade')
-                            ->relationship('cidade', 'nome')
+                            ->options(
+                                fn (Get $get): Collection => Cidade::query()->where('uf_id', $get('end_uf_id'))->pluck('nome', 'id')
+                            )
                             ->searchable()
+                            ->live()
                             ->preload(),
                         Forms\Components\TextInput::make('nome_contato')
                             ->maxLength(255),

@@ -3,9 +3,12 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\VendedorResource\Pages;
+use App\Models\Cidade;
 use App\Models\Vendedor;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
+use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Support\RawJs;
 use Filament\Tables;
@@ -14,6 +17,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Collection;
 
 class VendedorResource extends Resource
 {
@@ -86,13 +90,17 @@ class VendedorResource extends Resource
                             ->label('UF')
                             ->relationship('uf', 'nome')
                             ->searchable()
+                            ->live()
+                            ->afterStateUpdated(fn (Set $set) => $set('end_cidade_id', null))
                             ->preload(),
                         Forms\Components\Select::make('end_cidade_id')
                             ->label('Cidade')
-                            ->relationship('cidade', 'nome')
+                            ->options(
+                                fn (Get $get): Collection => Cidade::query()->where('uf_id', $get('end_uf_id'))->pluck('nome', 'id')
+                            )
                             ->searchable()
+                            ->live()
                             ->preload(),
-
                         Forms\Components\TextInput::make('telefone')
                             ->tel(),
                         Forms\Components\TextInput::make('celular')
