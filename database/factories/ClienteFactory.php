@@ -16,6 +16,15 @@ class ClienteFactory extends Factory
     protected static ?array $arr_vendedores;
 
     /**
+     * Get a new Faker instance.
+     *
+     * @return \Faker\Generator
+     */
+    public function withFaker()
+    {
+        return \Faker\Factory::create('pt_BR');
+    }
+    /**
      * Define the model's default state.
      *
      * @return array<string, mixed>
@@ -27,7 +36,7 @@ class ClienteFactory extends Factory
             'nome' => fake()->name(),
             'razao_social' => fake()->name(),
             'tipo_pessoa' => fake()->randomElement(['F', 'J']),
-            'cpf_cnpj' => fake()->unique()->numberBetween('11111111111', '21111111111'),
+            'cpf_cnpj' => fake()->unique()->cpf(),
 
             'email' => fake()->unique()->safeEmail(),
             'telefone' => fake()->phoneNumber(),

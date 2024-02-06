@@ -25,6 +25,8 @@ class AdminPanelProvider extends PanelProvider
     {
         return $panel
             ->sidebarCollapsibleOnDesktop(true)
+            ->brandLogo(asset('images/idevendas-logo.png'))
+            ->brandLogoHeight('3rem')
             ->default()
             ->id('admin')
             ->path('admin')
@@ -32,7 +34,7 @@ class AdminPanelProvider extends PanelProvider
             ->passwordReset()
             ->profile()
             ->colors([
-                'primary' => Color::Pink,
+                'primary' => Color::Amber,
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
@@ -58,9 +60,9 @@ class AdminPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ])
-			->resources([
-				config('filament-logger.activity_resource')
-			])
+            ->resources([
+                config('filament-logger.activity_resource')
+            ])
             ->databaseNotifications();
     }
 }

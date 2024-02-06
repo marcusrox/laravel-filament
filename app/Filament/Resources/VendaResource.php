@@ -26,6 +26,7 @@ class VendaResource extends Resource
     {
         return $form
             ->schema([
+
                 Forms\Components\Select::make('vendedor_id')
                     ->label('Vendedor')
                     ->relationship(
@@ -56,17 +57,25 @@ class VendaResource extends Resource
                     ->getOptionLabelFromRecordUsing(fn (Cliente $record) => "{$record->cpf_cnpj} - {$record->nome}")
                     ->searchable()
                     ->preload(),
-                Forms\Components\Select::make('tipo_frete')->options(Venda::opt_tipo_frete),
-                Forms\Components\Select::make('natureza_operacao')->options(Venda::opt_natureza_operacao),
-                Forms\Components\Textarea::make('observacao'),
-                Forms\Components\TextInput::make('numero_pedido'),
-                Forms\Components\TextInput::make('pct_comissao')->numeric()->maxValue(100),
-                Forms\Components\TextInput::make('pct_vpc')->numeric()->maxValue(100),
-                Forms\Components\TextInput::make('prazos_pagamento'),
-                Forms\Components\Select::make('transportadora_id')
-                    ->relationship('transportadora', 'nome')
-                    ->searchable()
-                    ->preload(),
+
+                Forms\Components\Section::make('Informações da Venda')
+                    ->columns(3)
+                    ->collapsed()
+                    ->collapsible()
+                    ->icon('heroicon-m-shopping-bag')
+                    ->schema([
+                        Forms\Components\Select::make('tipo_frete')->options(Venda::opt_tipo_frete),
+                        Forms\Components\Select::make('natureza_operacao')->options(Venda::opt_natureza_operacao),
+                        Forms\Components\TextInput::make('numero_pedido'),
+                        Forms\Components\TextInput::make('pct_comissao')->numeric()->maxValue(100),
+                        Forms\Components\TextInput::make('pct_vpc')->numeric()->maxValue(100),
+                        Forms\Components\TextInput::make('prazos_pagamento'),
+                        Forms\Components\Select::make('transportadora_id')
+                            ->relationship('transportadora', 'nome')
+                            ->searchable()
+                            ->preload(),
+                        Forms\Components\Textarea::make('observacao')->columnSpan(2),
+                    ]),
             ]);
     }
 
@@ -74,7 +83,17 @@ class VendaResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('id')->searchable()->sortable()->label('ID'),
+                Tables\Columns\TextColumn::make('vendedor.nome')->searchable()->sortable()->label('Vendedor'),
+                Tables\Columns\TextColumn::make('cliente.nome')->searchable()->sortable()->label('Cliente'),
+                Tables\Columns\TextColumn::make('created_at')->label('Data Criação')
+                    ->dateTime('d/m/Y H:i:s')
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('updated_at')->label('Atualização')
+                    ->dateTime('d/m/Y H:i:s')
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //
@@ -92,7 +111,7 @@ class VendaResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\ItensRelationManager::class,
         ];
     }
 

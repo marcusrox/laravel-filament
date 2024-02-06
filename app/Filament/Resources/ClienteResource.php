@@ -136,6 +136,7 @@ class ClienteResource extends Resource
                         Forms\Components\TextInput::make('celular_cobranca')
                             ->label('Celular')
                             ->tel(),
+
                     ]),
                 Forms\Components\Select::make('vendedor_id')
                     ->visible(!$user->is_vendedor())
