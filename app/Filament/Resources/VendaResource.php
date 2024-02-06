@@ -42,6 +42,7 @@ class VendaResource extends Resource
                     )
                     ->searchable()
                     ->preload(),
+
                 Forms\Components\Select::make('cliente_id')
                     ->label('Cliente')
                     ->relationship(
