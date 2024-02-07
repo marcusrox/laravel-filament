@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('contas_pagar', function (Blueprint $table) {
+        Schema::create('bancos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('centro_custo_id')->constrained('centros_custo')->cascadeOnDelete();
+            $table->string('nome');
+            $table->string('codigo');
+            $table->string('url');
             $table->timestamps();
         });
     }
@@ -23,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('contas_pagar');
+        Schema::dropIfExists('bancos');
     }
 };

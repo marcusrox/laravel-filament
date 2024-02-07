@@ -8,25 +8,20 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
-class ContaPagar extends Model
+class ContaCorrente extends Model
 {
     use HasFactory;
     use LogsActivity;
 
-    protected $table = 'contas_pagar';
+    protected $table = 'contas_correntes';
 
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()
             ->logFillable();
     }
-    public function conta_corrente(): BelongsTo
+    public function banco(): BelongsTo
     {
-        return $this->belongsTo(ContaCorrente::class);
-    }
-
-    public function centro_custo(): BelongsTo
-    {
-        return $this->belongsTo(CentroCusto::class);
+        return $this->belongsTo(Banco::class);
     }
 }
