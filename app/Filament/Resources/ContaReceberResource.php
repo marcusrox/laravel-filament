@@ -17,7 +17,7 @@ class ContaReceberResource extends Resource
 {
     protected static ?string $model = ContaReceber::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-arrow-right-end-on-rectangle';
 
     protected static ?string $navigationLabel = 'Contas a Receber';
     protected static ?string $navigationGroup = "Financeiro";

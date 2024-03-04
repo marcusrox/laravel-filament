@@ -29,6 +29,7 @@ class ContaCorrenteResource extends Resource
     {
         return $form
             ->schema([
+
                 Forms\Components\TextInput::make('nome')
                     ->label('Nome da Conta')
                     ->maxLength(255),
@@ -46,6 +47,7 @@ class ContaCorrenteResource extends Resource
                     ->maxLength(255),
                 Forms\Components\TextInput::make('dv_conta')
                     ->maxLength(2),
+
             ]);
     }
 
