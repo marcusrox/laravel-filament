@@ -55,7 +55,7 @@ class ContaCorrenteResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('id')->sortable()->label('ID'),
                 Tables\Columns\TextColumn::make('nome')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('banco.nome')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('created_at')

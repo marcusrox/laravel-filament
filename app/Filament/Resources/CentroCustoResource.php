@@ -36,7 +36,7 @@ class CentroCustoResource extends Resource
     {
         return $table
             ->columns([
-
+                Tables\Columns\TextColumn::make('id')->sortable()->label('ID'),
                 Tables\Columns\TextColumn::make('codigo')->searchable()->label('Código'),
                 Tables\Columns\TextColumn::make('nome')->searchable(),
                 Tables\Columns\TextColumn::make('created_at')->sortable()

@@ -121,9 +121,9 @@ class FornecedorResource extends Resource
         return $table
             ->columns([
 
-                Tables\Columns\TextColumn::make('id')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('id')->sortable()->label('ID'),
                 Tables\Columns\TextColumn::make('nome')->searchable()->sortable(),
-                Tables\Columns\TextColumn::make('cpf_cnpj')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('cpf_cnpj')->searchable()->sortable()->label('CPF/CNPJ'),
                 Tables\Columns\TextColumn::make('telefone')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime('d/m/Y H:i:s')
