@@ -15,6 +15,8 @@ class MoneyCast implements CastsAttributes
     public function get(Model $model, string $key, mixed $value, array $attributes): mixed
     {
         // Transform the integer stored in the database into a float.
+        // $v = str_replace(['.', ','], ['', '.'], $value);
+        // return round(floatval($v) / 100, precision: 2);
         return round(floatval($value) / 100, precision: 2);
     }
 

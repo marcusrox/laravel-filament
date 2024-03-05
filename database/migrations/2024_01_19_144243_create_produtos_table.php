@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('nome_curto')->unique()->nullable();
             $table->string('ncm')->unique()->nullable();
             $table->string('slug');
-            $table->foreignId('fornecedor_id')->nullable()->unique()->constrained('fornecedores')->cascadeOnDelete();
+            $table->foreignId('fornecedor_id')->nullable()->constrained('fornecedores')->cascadeOnDelete();
 
             $table->integer('preco_custo');
             $table->integer('preco_venda');

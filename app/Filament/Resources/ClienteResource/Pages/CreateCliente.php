@@ -18,7 +18,12 @@ class CreateCliente extends CreateRecord
             Notification::make()
             ->success()
             ->title('Novo cliente')
-            ->body('O novo cliente foi cadastrao com sucesso!')
+            ->body('O novo cliente foi cadastrado com sucesso!')
             ->sendToDatabase(\auth()->user());
+    }
+
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
     }
 }

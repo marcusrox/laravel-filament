@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Enums\PessoaType;
 use App\Filament\Resources\ClienteResource\Pages;
 use App\Models\Cidade;
 use App\Models\Cliente;
@@ -18,6 +19,7 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
+
 
 class ClienteResource extends Resource
 {
@@ -47,10 +49,8 @@ class ClienteResource extends Resource
                             ->required()
                             ->maxLength(255),
                         Forms\Components\Select::make('tipo_pessoa')
-                            ->options([
-                                'J' => 'Jurídica',
-                                'F' => 'Física',
-                            ]),
+                            ->native(false)
+                            ->options(PessoaType::class),
                         Forms\Components\TextInput::make('cpf_cnpj')
                             ->label('CPF/CNPJ')
                             ->mask(RawJs::make(<<<'JS'

@@ -17,6 +17,7 @@ class Produto extends Model
 
     protected $casts = [
         'preco_custo' => MoneyCast::class,
+        'preco_venda' => MoneyCast::class,
     ];
 
     public function fornecedor(): BelongsTo
