@@ -18,6 +18,21 @@ class Venda extends Model
     public const opt_tipo_frete = ['FOB', 'CIF'];
     public const opt_natureza_operacao = ['VENDA', 'BONIF'];
 
+    public static function boot()
+    {
+        parent::boot();
+        self::creating(function ($model) {
+            // Setar valor padrão para venda_situacao_id
+            $model->venda_situacao_id = 1;
+        });
+        self::updating(function ($model) {
+            //
+        });
+        self::deleting(function ($model) {
+            //
+        });
+    }
+
     public function vendedor(): BelongsTo
     {
         return $this->belongsTo(Vendedor::class);
