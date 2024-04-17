@@ -65,17 +65,18 @@ class VendaResource extends Resource
                     ->collapsible()
                     ->icon('heroicon-m-shopping-bag')
                     ->schema([
-                        Forms\Components\Select::make('tipo_frete')->options(Venda::opt_tipo_frete),
-                        Forms\Components\Select::make('natureza_operacao')->options(Venda::opt_natureza_operacao),
-                        Forms\Components\TextInput::make('numero_pedido'),
-                        Forms\Components\TextInput::make('pct_comissao')->numeric()->maxValue(100),
-                        Forms\Components\TextInput::make('pct_vpc')->numeric()->maxValue(100),
-                        Forms\Components\TextInput::make('prazos_pagamento'),
+                        Forms\Components\Select::make('tipo_frete')->options(Venda::opt_tipo_frete)->label('Tipo de Frete'),
+                        Forms\Components\Select::make('natureza_operacao')->options(Venda::opt_natureza_operacao)->label('Natureza da Operação'),
+                        Forms\Components\TextInput::make('numero_pedido')->label('Número do pedido (vendedor)'),
+                        Forms\Components\TextInput::make('pct_comissao')->numeric()->maxValue(100)->label('Pct Comissão %'),
+                        Forms\Components\TextInput::make('pct_vpc')->numeric()->maxValue(100)->label('Pct VPC %'),
+                        Forms\Components\TextInput::make('prazos_pagamento')->label('Prazos de pagamento')->placeholder('Exemplo: 30/60/90/120'),
+                        Forms\Components\DatePicker::make('dt_base_faturamento')->default(now())->label('Data base para faturamento'),
                         Forms\Components\Select::make('transportadora_id')
                             ->relationship('transportadora', 'nome')
                             ->searchable()
                             ->preload(),
-                        Forms\Components\Textarea::make('observacao')->columnSpan(2),
+                        Forms\Components\Textarea::make('observacao')->label('Observação'),
                     ]),
             ]);
     }
