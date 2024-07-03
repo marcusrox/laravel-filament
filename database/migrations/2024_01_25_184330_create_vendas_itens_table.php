@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('venda_id')->constrained('vendas')->cascadeOnDelete();
             $table->foreignId('produto_id')->constrained('produtos')->cascadeOnDelete();
             $table->integer('qtd_itens');
-            $table->bigInteger('pct_ipi');
+            $table->bigInteger('pct_ipi')->nullable();
             $table->bigInteger('preco_venda');
             $table->timestamps();
         });

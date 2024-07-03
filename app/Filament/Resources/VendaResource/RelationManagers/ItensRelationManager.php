@@ -5,6 +5,7 @@ namespace App\Filament\Resources\VendaResource\RelationManagers;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
+use Filament\Support\RawJs;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -14,13 +15,32 @@ class ItensRelationManager extends RelationManager
 {
     protected static string $relationship = 'itens';
 
+    protected static ?string $title = 'Produtos';
+
     public function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('nome')
+                Forms\Components\Select::make('produto_id')
+                    ->label('Produto')
                     ->required()
-                    ->maxLength(255),
+                    ->relationship(
+                        'produto',
+                        'nome'
+                    )
+                    ->searchable()
+                    ->preload(),
+                Forms\Components\TextInput::make('qtd_itens')
+                    ->integer()
+                    ->required()
+                    ->maxValue(999999),
+                Forms\Components\TextInput::make('preco_venda')
+                    ->label('Preço de Venda')
+                    ->mask(RawJs::make('$money($input,  \',\')'))
+                    ->prefix('R$')
+                    ->required()
+                    ->minValue(0)
+                    ->maxValue(999999),
             ]);
     }
 

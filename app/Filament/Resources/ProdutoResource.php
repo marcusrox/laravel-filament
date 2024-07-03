@@ -12,6 +12,7 @@ use Filament\Support\RawJs;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Support\Str;
+use Rodrigofs\FilamentMaskInput\Components\MaskInput;
 
 class ProdutoResource extends Resource
 {
@@ -49,9 +50,15 @@ class ProdutoResource extends Resource
                     ->searchable()
                     ->preload()
                     ->required(),
-                Forms\Components\TextInput::make('preco_custo')
+                // Forms\Components\TextInput::make('preco_custo')1
+                //     ->label('Preço de Custo')
+                //     //->mask(RawJs::make('$money($input,  \',\')'))
+                //     ->mask(RawJs::make('$money($input)'))
+                //     ->prefix('R$')
+                //     ->required(),
+                MaskInput::make('preco_custo')
                     ->label('Preço de Custo')
-                    ->mask(RawJs::make('$money($input,  \',\')'))
+                    ->money()
                     ->prefix('R$')
                     ->required(),
                 Forms\Components\TextInput::make('preco_venda')

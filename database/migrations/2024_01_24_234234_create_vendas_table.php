@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('vendedor_id')->constrained('vendedores')->cascadeOnDelete();
             $table->foreignId('cliente_id')->constrained('clientes')->cascadeOnDelete();
             $table->foreignId('venda_situacao_id')->constrained('vendas_situacoes')->cascadeOnDelete();
-            $table->string('observacao');
+            $table->string('observacao')->nullable();
             $table->string('numero_pedido');
             $table->enum('tipo_frete', ['FOB', 'CIF']);
             $table->enum('natureza_operacao', ['VENDA', 'BONIF']);

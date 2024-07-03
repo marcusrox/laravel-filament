@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Casts\MoneyCast;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -14,6 +15,10 @@ class VendaItem extends Model
 
     use HasFactory;
     use LogsActivity;
+
+    protected $casts = [
+        'preco_venda' => MoneyCast::class,
+    ];
 
     public function venda(): BelongsTo
     {
