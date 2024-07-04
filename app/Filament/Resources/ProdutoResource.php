@@ -56,21 +56,28 @@ class ProdutoResource extends Resource
                 //     ->mask(RawJs::make('$money($input)'))
                 //     ->prefix('R$')
                 //     ->required(),
+
+
                 MaskInput::make('preco_custo')
                     ->label('Preço de Custo')
-                    ->money()
+                    ->money(allowNegative: false)
                     ->prefix('R$')
                     ->required(),
-                Forms\Components\TextInput::make('preco_venda')
+                MaskInput::make('preco_venda')
                     ->label('Preço de Venda')
-                    ->mask(RawJs::make('$money($input,  \',\')'))
+                    ->money(allowNegative: false)
                     ->prefix('R$')
                     ->required(),
-                Forms\Components\TextInput::make('preco_venda_min')
-                    ->label('Preço Mínimo de Venda')
-                    ->mask(RawJs::make('$money($input,  \',\')'))
+                MaskInput::make('preco_venda_min')
+                    ->label('Preço de Venda Min')
+                    ->money(allowNegative: false)
                     ->prefix('R$')
                     ->required(),
+                // Forms\Components\TextInput::make('preco_venda_min')
+                //     ->label('Preço Mínimo de Venda')
+                //     ->mask(RawJs::make('$money($input,  \',\')'))
+                //     ->prefix('R$')
+                //     ->required(),
                 // Forms\Components\TextInput::make('preco_custo')
                 //     ->required()
                 //     ->mask('money')
@@ -128,6 +135,9 @@ class ProdutoResource extends Resource
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('preco_custo')->label('Preço de Custo')
+                    ->money('BRL')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('preco_venda')->label('Preço de Venda')
                     ->money('BRL')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('qtd_estoque')
