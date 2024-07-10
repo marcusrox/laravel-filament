@@ -25,6 +25,7 @@ class CategoriaResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('nome')
                     ->required()
+                    ->unique()
                     ->maxLength(255)
                     ->reactive()
                     ->live(onBlur: true)
