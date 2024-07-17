@@ -5,7 +5,9 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\VendaResource\Pages;
 use App\Filament\Resources\VendaResource\RelationManagers;
 use App\Models\Cliente;
+use App\Models\Config;
 use App\Models\Venda;
+use App\Rules\ClienteComRestricaoVenda;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -57,7 +59,10 @@ class VendaResource extends Resource
                     )
                     ->getOptionLabelFromRecordUsing(fn (Cliente $record) => "{$record->cpf_cnpj} - {$record->nome}")
                     ->searchable()
-                    ->preload(),
+                    ->preload()
+                    ->rules([
+                        new ClienteComRestricaoVenda('your_table_name', ['year_id', 'student_id']),
+                    ]),
 
                 Forms\Components\Section::make('Informações da Venda')
                     ->columns(3)
@@ -65,18 +70,28 @@ class VendaResource extends Resource
                     ->collapsible()
                     ->icon('heroicon-m-shopping-bag')
                     ->schema([
-                        Forms\Components\Select::make('tipo_frete')->options(Venda::opt_tipo_frete)->label('Tipo de Frete'),
-                        Forms\Components\Select::make('natureza_operacao')->options(Venda::opt_natureza_operacao)->label('Natureza da Operação'),
-                        Forms\Components\TextInput::make('numero_pedido')->label('Número do pedido (vendedor)'),
-                        Forms\Components\TextInput::make('pct_comissao')->numeric()->maxValue(100)->label('Pct Comissão %'),
-                        Forms\Components\TextInput::make('pct_vpc')->numeric()->maxValue(100)->label('Pct VPC %'),
-                        Forms\Components\TextInput::make('prazos_pagamento')->label('Prazos de pagamento')->placeholder('Exemplo: 30/60/90/120'),
-                        Forms\Components\DatePicker::make('dt_base_faturamento')->default(now())->label('Data base para faturamento'),
+                        Forms\Components\Select::make('tipo_frete')
+                            ->options(Venda::opt_tipo_frete)->label('Tipo de Frete')->required(),
+                        Forms\Components\Select::make('natureza_operacao')
+                            ->options(Venda::opt_natureza_operacao)->label('Natureza da Operação')->required(),
+                        Forms\Components\TextInput::make('numero_pedido')
+                            ->label('Número do pedido (vendedor)'),
+                        Forms\Components\TextInput::make('pct_comissao')
+                            ->numeric()->maxValue(100)->label('Pct Comissão %')
+                            ->default(Config::get('venda.pct_comissao_default'))->required(),
+                        Forms\Components\TextInput::make('pct_vpc')
+                            ->numeric()->maxValue(100)->label('Pct VPC %')
+                            ->default(0)->required(),
+                        Forms\Components\TextInput::make('prazos_pagamento')
+                            ->label('Prazos de pagamento')->placeholder('Exemplo: 30/60/90/120')->required(),
+                        Forms\Components\DatePicker::make('dt_base_faturamento')
+                            ->default(now())->label('Data base para faturamento')->required(),
                         Forms\Components\Select::make('transportadora_id')
                             ->relationship('transportadora', 'nome')
                             ->searchable()
                             ->preload(),
-                        Forms\Components\Textarea::make('observacao')->label('Observação'),
+                        Forms\Components\Textarea::make('observacao')
+                            ->label('Observação'),
                     ]),
             ]);
     }
