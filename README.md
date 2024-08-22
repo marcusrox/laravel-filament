@@ -6,7 +6,9 @@ https://filamentphp.com/docs/3.x/panels/getting-started
 
 ## Comandos pós clone
 
-- composer install
+(Instale o PHP, Composer e o Node JS)
+
+- composer install (ou composer install --ignore-platform-reqs)
 - npm install
 - npm run build
 - php artisan migrate

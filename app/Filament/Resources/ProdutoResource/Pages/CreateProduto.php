@@ -11,9 +11,9 @@ class CreateProduto extends CreateRecord
 
     protected function mutateFormDataBeforeCreate(array $data): array
     {
-        $data['preco_custo'] = str_replace(['.', ','], ['', '.'], $data['preco_custo']);
-        $data['preco_venda'] = str_replace(['.', ','], ['', '.'], $data['preco_venda']);
-        $data['preco_venda_min'] = str_replace(['.', ','], ['', '.'], $data['preco_venda_min']);
+        //$data['preco_custo'] = str_replace(['.', ','], ['', '.'], $data['preco_custo']);
+        //$data['preco_venda'] = str_replace(['.', ','], ['', '.'], $data['preco_venda']);
+        //$data['preco_venda_min'] = str_replace(['.', ','], ['', '.'], $data['preco_venda_min']);
         return $data;
     }
 }

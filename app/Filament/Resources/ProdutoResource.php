@@ -12,6 +12,7 @@ use Filament\Support\RawJs;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Support\Str;
+use Leandrocfe\FilamentPtbrFormFields\Money as PtbrMoney;
 use Rodrigofs\FilamentMaskInput\Components\MaskInput;
 
 class ProdutoResource extends Resource
@@ -50,43 +51,74 @@ class ProdutoResource extends Resource
                     ->searchable()
                     ->preload()
                     ->required(),
-                // Forms\Components\TextInput::make('preco_custo')1
-                //     ->label('Preço de Custo')
-                //     //->mask(RawJs::make('$money($input,  \',\')'))
-                //     ->mask(RawJs::make('$money($input)'))
-                //     ->prefix('R$')
-                //     ->required(),
 
-
-                MaskInput::make('preco_custo')
-                    ->label('Preço de Custo')
-                    ->money(allowNegative: false)
-                    ->prefix('R$')
-                    ->required(),
-                MaskInput::make('preco_venda')
-                    ->label('Preço de Venda')
-                    ->money(allowNegative: false)
-                    ->prefix('R$')
-                    ->required(),
-                MaskInput::make('preco_venda_min')
-                    ->label('Preço de Venda Min')
-                    ->money(allowNegative: false)
-                    ->prefix('R$')
-                    ->required(),
-                // Forms\Components\TextInput::make('preco_venda_min')
-                //     ->label('Preço Mínimo de Venda')
+                //                 Forms\Components\TextInput::make('preco_custo')
+                //                     ->label('Preço de Custo')
+                //                     //->mask(RawJs::make('$money($input,  \',\')'))
+                //                     ->mask(RawJs::make(
+                //                         <<<'JS'
+                // $money($input, ',', '.', 2)
+                // JS
+                //                     ))
+                //                     ->prefix('R$')
+                //                     ->required(),
+                // Forms\Components\TextInput::make('preco_venda')
+                //     ->label('Preço de Venda')
                 //     ->mask(RawJs::make('$money($input,  \',\')'))
                 //     ->prefix('R$')
                 //     ->required(),
-                // Forms\Components\TextInput::make('preco_custo')
-                //     ->required()
+                // Forms\Components\TextInput::make('preco_venda_min')
+                // ->label('Preço Mínimo de Venda')
                 //     ->mask('money')
                 //     ->numeric()
                 //     ->prefix('R$')
-                //     ->maxValue(42949672.95),
+                //     ->required()
+
+                // MaskInput::make('preco_custo')
+                //     ->label('Preço de Custo')
+                //     ->money(allowNegative: false)
+                //     ->prefix('R$')
+                //     ->required(),
+                // MaskInput::make('preco_venda')
+                //     ->label('Preço de Venda')
+                //     ->money(allowNegative: false)
+                //     ->prefix('R$')
+                //     ->required(),
+                // MaskInput::make('preco_venda_min')
+                //     ->label('Preço de Venda Min')
+                //     ->money(allowNegative: false)
+                //     ->prefix('R$')
+                //     ->required(),
+
+                // PtbrMoney::make('preco_custo')
+                //     ->label('Preço de Custo')
+                //     ->dehydrateMask(true)
+                //     ->required(),
+                // PtbrMoney::make('preco_venda')
+                //     ->label('Preço de Venda')
+                //     ->dehydrateMask(true)
+                //     ->required(),
+                // PtbrMoney::make('preco_venda_min')
+                //     ->label('Preço de Venda Min')
+                //     ->dehydrateMask(true)
+                //     ->required(),
+
+                Forms\Components\TextInput::make('preco_custo')
+                    ->numeric()
+                    ->prefix('R$')
+                    ->mask(RawJs::make('$money($input,', ')'))
+                    ->required(),
+                Forms\Components\TextInput::make('preco_venda')
+                    ->numeric()
+                    ->prefix('R$')
+                    ->required(),
+                Forms\Components\TextInput::make('preco_venda_min')
+                    ->numeric()
+                    ->prefix('R$')
+                    ->required(),
+
                 Forms\Components\TextInput::make('peso_liquido')
                     ->numeric(),
-
                 Forms\Components\TextInput::make('qtd_estoque')
                     ->numeric(),
                 Forms\Components\TextInput::make('qtd_estoque_min')
