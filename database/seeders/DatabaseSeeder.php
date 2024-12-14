@@ -32,6 +32,7 @@ class DatabaseSeeder extends Seeder
             BancoSeeder::class,
             ContaCorrenteSeeder::class,
             ContaPagarSeeder::class,
+            Config::class,
         ]);
 
         \App\Models\User::factory(10)->create();

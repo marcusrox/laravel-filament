@@ -6,7 +6,9 @@ https://filamentphp.com/docs/3.x/panels/getting-started
 
 ## Comandos pós clone
 
-- composer install
+(Instale o PHP, Composer e o Node JS)
+
+- composer install (ou composer install --ignore-platform-reqs)
 - npm install
 - npm run build
 - php artisan migrate
@@ -15,7 +17,7 @@ https://filamentphp.com/docs/3.x/panels/getting-started
 - cp .env.example .env
 - php artisan key:generate
 - php artisan storage:link
-- php artisan db:wipe
+- php artisan db:wipe (caso seja necessário zerar a base de dados)
 
 ## Comandos úteis para o desenvolvimento
 - php artisan make:filament-resource Cliente --generate

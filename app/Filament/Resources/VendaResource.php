@@ -72,16 +72,21 @@ class VendaResource extends Resource
                     ->schema([
                         Forms\Components\Select::make('tipo_frete')
                             ->options(Venda::opt_tipo_frete)->label('Tipo de Frete')->required(),
+
                         Forms\Components\Select::make('natureza_operacao')
                             ->options(Venda::opt_natureza_operacao)->label('Natureza da Operação')->required(),
+
                         Forms\Components\TextInput::make('numero_pedido')
                             ->label('Número do pedido (vendedor)'),
+
                         Forms\Components\TextInput::make('pct_comissao')
                             ->numeric()->maxValue(100)->label('Pct Comissão %')
                             ->default(Config::getValue('venda.pct_comissao_default'))->required(),
+
                         Forms\Components\TextInput::make('pct_vpc')
                             ->numeric()->maxValue(100)->label('Pct VPC %')
-                            ->default(0)->required(),
+                            ->default(Config::getValue('venda.pct_vpc_default'))->required(),
+
                         Forms\Components\TextInput::make('prazos_pagamento')
                             ->label('Prazos de pagamento')->placeholder('Exemplo: 30/60/90/120')->required(),
                         Forms\Components\DatePicker::make('dt_base_faturamento')
