@@ -16,22 +16,20 @@ class ClienteComRestricaoVenda implements Rule
     //     $this->columns = $columns;
     // }
 
-    public function __construct($table, $columns)
-    {
-    }
+    public function __construct($table, $columns) {}
 
     public function passes($attribute, $value)
     {
         $cliente_id = $value;
 
-
-        dd($attribute, $value);
+        // Fazer a verificação se o cliente tem restrição
+        //dd($attribute, $value);
         // $count = DB::table($this->table)
         //     ->where($this->columns[0], $value[0])
         //     ->where($this->columns[1], $value[1])
         //     ->count();
 
-        return false;
+        return true;
     }
 
     public function message()

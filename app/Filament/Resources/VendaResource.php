@@ -57,7 +57,7 @@ class VendaResource extends Resource
                             }
                         },
                     )
-                    ->getOptionLabelFromRecordUsing(fn (Cliente $record) => "{$record->cpf_cnpj} - {$record->nome}")
+                    ->getOptionLabelFromRecordUsing(fn(Cliente $record) => "{$record->cpf_cnpj} - {$record->nome}")
                     ->searchable()
                     ->preload()
                     ->rules([
@@ -78,7 +78,7 @@ class VendaResource extends Resource
                             ->label('Número do pedido (vendedor)'),
                         Forms\Components\TextInput::make('pct_comissao')
                             ->numeric()->maxValue(100)->label('Pct Comissão %')
-                            ->default(Config::get('venda.pct_comissao_default'))->required(),
+                            ->default(Config::getValue('venda.pct_comissao_default'))->required(),
                         Forms\Components\TextInput::make('pct_vpc')
                             ->numeric()->maxValue(100)->label('Pct VPC %')
                             ->default(0)->required(),
@@ -116,7 +116,8 @@ class VendaResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()
+                //->successNotificationTitle('Venda atualizada com sucesso'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

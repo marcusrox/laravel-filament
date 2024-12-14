@@ -9,6 +9,7 @@ use Filament\Resources\Pages\EditRecord;
 class EditVenda extends EditRecord
 {
     protected static string $resource = VendaResource::class;
+    //protected static ?string $title = "Venda " . $this->record->id;
 
     protected function getHeaderActions(): array
     {

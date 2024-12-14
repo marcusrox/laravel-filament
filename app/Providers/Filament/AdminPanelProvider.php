@@ -24,15 +24,10 @@ class AdminPanelProvider extends PanelProvider
     public function panel(Panel $panel): Panel
     {
         return $panel
-            ->sidebarCollapsibleOnDesktop(true)
-            ->brandLogo(asset('images/idevendas-logo.png'))
-            ->brandLogoHeight('3rem')
             ->default()
             ->id('admin')
             ->path('admin')
             ->login()
-            ->passwordReset()
-            ->profile()
             ->colors([
                 'primary' => Color::Amber,
             ])
@@ -59,10 +54,6 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ])
-            ->resources([
-                config('filament-logger.activity_resource')
-            ])
-            ->databaseNotifications();
+            ]);
     }
 }
