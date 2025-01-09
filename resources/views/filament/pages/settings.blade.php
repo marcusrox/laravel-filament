@@ -14,6 +14,7 @@
     </div>
     <div class="w-2/4 p-4 text-white">
     @livewire(\App\Filament\Widgets\FaturamentoChart::class)
+
     </div>
 </div>
 

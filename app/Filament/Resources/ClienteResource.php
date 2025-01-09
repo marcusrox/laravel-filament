@@ -95,12 +95,12 @@ class ClienteResource extends Resource
                             ->relationship('uf', 'nome')
                             ->searchable()
                             ->live()
-                            ->afterStateUpdated(fn (Set $set) => $set('end_cidade_id', null))
+                            ->afterStateUpdated(fn(Set $set) => $set('end_cidade_id', null))
                             ->preload(),
                         Forms\Components\Select::make('end_cidade_id')
                             ->label('Cidade')
                             ->options(
-                                fn (Get $get): Collection => Cidade::query()->where('uf_id', $get('end_uf_id'))->pluck('nome', 'id')
+                                fn(Get $get): Collection => Cidade::query()->where('uf_id', $get('end_uf_id'))->pluck('nome', 'id')
                             )
                             ->searchable()
                             ->live()
